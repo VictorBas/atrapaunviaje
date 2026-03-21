@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Destino - Atrapa un Viaje</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-grid">
+    <div class="header-title">
+      <h1>Atrapa un Viaje ✈️</h1>
+      <p>Vuelos baratos y escapadas inolvidables</p>
+    </div>
+    <div class="header-btn">
+      <a href="index.html" class="btn-volver">🏠 Inicio</a>
+    </div>
+  </div>
+</header>
+
+
+<section id="hero-destino" class="hero-destino">
+  <div class="hero-grid">
+    <div class="detalle-viaje" id="detalle-viaje"></div>
+  </div>
+</section>
+
+<section class="itinerario">
+  <h2>Itinerario recomendado</h2>
+  <div class="dias" id="dias-itinerario"></div>
+</section>
+
+<footer>
+  <p>© 2026 Atrapa un Viaje</p>
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const slug = params.get('slug');
+
+fetch('destinos.json')
+  .then(res => res.json())
+  .then(data => {
+    const destino = data.find(d => d.slug === slug);
+    if(destino){
+      const hero = document.getElementById('hero-destino');
+      hero.style.backgroundImage = `url(${destino.imagen})`;
+
+      const detalle = document.getElementById('detalle-viaje');
+      detalle.innerHTML = `
+        <h2>${destino.nombre} - ${destino.dias} días</h2>
+        <p>Vuelo: ${destino.vuelo}€ ida y vuelta</p>
+        <button class="btn" onclick="window.open('https://www.skyscanner.es/transport/flights/mad/${destino.slug}/','_blank')">Reservar vuelo</button>
+        <p>Hotel recomendado: <strong>${destino.hotel}</strong> ${destino.hotel_precio}€</p>
+      `;
+
+      const diasIt = document.getElementById('dias-itinerario');
+      diasIt.innerHTML = destino.itinerario.map((d,i)=>`
+        <div class="dia">
+          <h3>Día ${i+1}</h3>
+          <p>${d}</p>
+        </div>
+      `).join('');
+    }
+  });
+</script>
+</body>
+</html>

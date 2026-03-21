@@ -1,0 +1,363 @@
+/* ======================== */
+/*        BODY & BASE       */
+/* ======================== */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #f0f4f8;
+  color: #333;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* ======================== */
+/*         HEADER           */
+/* ======================== */
+.header {
+  background: linear-gradient(90deg, #0070f3, #00c6ff);
+  color: white;
+  text-align: center;
+  padding: 12px 20px; /* altura reducida */
+}
+
+.header-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-size: 28px; 
+}
+
+.header-title p {
+  margin: 5px 0 0 0;
+  font-size: 14px; 
+}
+
+/* Botón volver inicio */
+.btn-volver {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18; /* color base */
+}
+
+.btn-volver:hover {
+  transform: scale(1.05);
+}
+
+.btn-volver:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* ======================== */
+/* HERO HOME + BUSCADOR + OFERTAS */
+/* ======================== */
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+  color: white;
+}
+
+.hero-grid {
+  display: flex;
+  gap: 40px; 
+  justify-content: space-between;
+  align-items: flex-start;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 15px;
+  flex-wrap: wrap;
+}
+
+/* ===== BUSCADOR ===== */
+.buscador {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+.buscador h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.search-bar input {
+  width: 95%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+.search-bar .btn {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18;
+}
+
+.search-bar .btn:hover {
+  transform: scale(1.05);
+}
+
+.search-bar .btn:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* ===== SEPARADOR BLANCO ===== */
+.separator {
+  width: 4px; 
+  background: white;
+  border-radius: 2px; 
+  margin: 0 20px;
+}
+
+/* ===== OFERTAS HERO ===== */
+.ofertas-hero {
+  flex: 2;
+  min-width: 300px;
+}
+
+.ofertas-hero h2 {
+  margin-bottom: 15px;
+}
+
+/* Grid de 3 columnas para ofertas */
+.cards-hero {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.cards-hero .card {
+  background: rgba(255,255,255,0.95);
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.cards-hero .card h3 {
+  margin-top: 0;
+  color: #0070f3;
+}
+
+.cards-hero .card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.cards-hero .btn {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18;
+}
+
+.cards-hero .btn:hover {
+  transform: scale(1.05);
+}
+
+.cards-hero .btn:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* ======================== */
+/* HERO DESTINO DINÁMICO */
+.hero-destino {
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  color: white;
+  border-radius: 15px;
+}
+
+.hero-destino .detalle-viaje {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.hero-destino .btn {
+  position: relative;
+  display: inline-block;
+  padding: 12px 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18;
+}
+
+.hero-destino .btn:hover {
+  transform: scale(1.05);
+}
+
+.hero-destino .btn:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* ======================== */
+/* ITINERARIO */
+.itinerario {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.itinerario h2 {
+  margin-bottom: 25px;
+}
+
+.dias {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dia {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.dia h3 {
+  margin-top: 0;
+  color: #0070f3;
+}
+
+.dia p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* ======================== */
+/* FOOTER */
+footer {
+  background: #0a2540;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+/* ======================== */
+/* ANIMACIÓN GRADIENTE BOTONES */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ======================== */
+/* RESPONSIVE */
+@media(max-width: 1200px) {
+  .cards-hero {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 900px) {
+  .hero-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .cards-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .dias {
+    flex-direction: column;
+    align-items: center;
+  }
+}

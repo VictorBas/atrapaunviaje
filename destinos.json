@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "roma",
+    "nombre": "Roma",
+    "dias": 4,
+    "vuelo": 40,
+    "hotel": "Hotel Roma Central",
+    "hotel_precio": 120,
+    "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/09/19/coliseo_9b206d89_240919151753_1280x853.jpg",
+    "itinerario": [
+      "Coliseo, Fontana di Trevi, Piazza Venezia",
+      "Vaticano, Plaza de San Pedro, Museos Vaticanos",
+      "Trastevere, Campo de’ Fiori, compras y restaurantes locales",
+      "Paseo final por plazas y despedida"
+    ]
+  },
+  {
+    "slug": "paris",
+    "nombre": "París",
+    "dias": 5,
+    "vuelo": 50,
+    "hotel": "Hotel París Centro",
+    "hotel_precio": 150,
+    "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/02/14/torre-eiffel_6e9796fd_278483323_240214093442_1280x853.jpg",
+    "itinerario": [
+      "Torre Eiffel, Campos Elíseos",
+      "Museo del Louvre, Jardines de las Tullerías",
+      "Montmartre, Sacré-Cœur, Moulin Rouge",
+      "Barrio Latino, Notre-Dame, compras",
+      "Paseo final por la ciudad y despedida"
+    ]
+  },
+  {
+    "slug": "londres",
+    "nombre": "Londres",
+    "dias": 3,
+    "vuelo": 60,
+    "hotel": "Hotel Londres Central",
+    "hotel_precio": 100,
+    "imagen": "https://as2.ftcdn.net/v2/jpg/01/35/61/33/1000_F_135613354_mBHFo7PIVm6hu7iMHy8IoE0WuCRcoe1Q.jpg",
+    "itinerario": [
+      "London Eye, Big Ben, Westminster",
+      "Museo Británico, Covent Garden",
+      "Camden Market y despedida"
+    ]
+  },
+  {
+  "slug": "lisboa",
+  "nombre": "Lisboa",
+  "dias": 3,
+  "vuelo": 70,
+  "hotel": "Hotel Lisboa Centro",
+  "hotel_precio": 120,
+  "imagen": "https://cdn2.civitatis.com/portugal/lisboa/guia/lisbon-tram-seo.jpg",
+  "itinerario": [
+    "Barrio de Alfama, Catedral de Lisboa",
+    "Plaza del Comercio y Elevador de Santa Justa",
+    "Belém, Torre de Belém y pastel de nata"
+  ]
+}
+
+]

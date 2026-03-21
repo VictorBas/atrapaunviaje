@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Atrapa un Viaje</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>Atrapa un Viaje ✈️</h1>
+  <p>Vuelos baratos y escapadas inolvidables</p>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <!-- BUSCADOR -->
+    <div class="buscador">
+      <h2>Busca tu vuelo ideal 🌍</h2>
+      <div class="search-bar">
+        <input type="text" id="origen" placeholder="Origen (ej: Madrid)">
+        <input type="text" id="destino" placeholder="Destino (ej: Roma)">
+        <input type="number" id="dias" placeholder="Duración (días)">
+        <button class="btn" onclick="buscarVuelos()">Buscar vuelos</button>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- OFERTAS DINÁMICAS -->
+    <div class="ofertas-hero">
+      <h2>Ofertas seleccionadas ✨</h2>
+      <div class="cards-hero" id="cards-hero">
+        <!-- Aquí se generarán las ofertas -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Atrapa un Viaje</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+fetch('destinos.json')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('cards-hero');
+    container.innerHTML = data.map(d => `
+      <div class="card">
+        <h3>${d.nombre}</h3>
+        <p>${d.dias} días</p>
+        <p>Vuelo: ${d.vuelo}€ ida y vuelta</p>
+        <p>Hotel: <strong>${d.hotel}</strong> ${d.hotel_precio}€</p>
+        <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">Ver detalles</button>
+      </div>
+    `).join('');
+  });
+</script>
+</body>
+</html>
