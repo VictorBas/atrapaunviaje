@@ -711,6 +711,58 @@ footer {
 .input-fecha:invalid::-webkit-datetime-edit {
   color: #999;
 }
+.input-fecha-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-fecha-wrapper input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+/* El input real invisible encima */
+.input-date-real {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.input-fecha-wrapper {
+  position: relative;
+}
+
+.input-date-real {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fake-input {
+  display: block;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+}
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  font-family: inherit;
+}
 
 
 
