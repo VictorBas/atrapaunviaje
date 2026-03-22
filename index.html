@@ -23,13 +23,15 @@
         <div class="buscador">
           <h2>Busca tu vuelo ideal 🌍</h2>
 
-          <button id="btn-toggle-vuelo" class="btn" style="width:auto; padding:6px 12px; font-size:14px; margin-bottom:10px;">Modo: Ida y vuelta</button>
+          <button id="btn-toggle-vuelo" class="btn"
+            style="width:auto; padding:6px 12px; font-size:14px; margin-bottom:10px;">Modo: Ida y vuelta</button>
 
           <div class="search-bar">
             <input type="text" id="origen" placeholder="Código IATA origen (ej: MAD)">
             <input type="text" id="destino" placeholder="Código IATA destino (ej: ROM)">
-            <input type="date" id="fecha-ida">
-            <input type="date" id="fecha-vuelta">
+            <input type="date" id="fecha-ida" class="input-fecha" required>
+            <input type="date" id="fecha-vuelta" class="input-fecha" required>
+
             <button class="btn" id="btn-buscar">Buscar vuelos</button>
           </div>
         </div>
@@ -38,7 +40,8 @@
         <div class="ofertas-hero">
           <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 15px;">
             <h2>Ofertas seleccionadas ✨</h2>
-            <button id="btn-fav-toggle" class="btn" style="width:auto; padding:6px 12px; font-size:14px;">Mostrar favoritos</button>
+            <button id="btn-fav-toggle" class="btn" style="width:auto; padding:6px 12px; font-size:14px;">Mostrar
+              favoritos</button>
           </div>
           <div class="cards-hero" id="cards-hero">
             <!-- Ofertas generadas por JS -->
@@ -89,26 +92,26 @@
     });
 
     document.getElementById('btn-buscar').addEventListener('click', () => {
-    const origen = document.getElementById('origen').value.toUpperCase();
-    const destino = document.getElementById('destino').value.toUpperCase();
-    let fechaIda = document.getElementById('fecha-ida').value;   // "2026-03-29"
-    let fechaVuelta = document.getElementById('fecha-vuelta').value;
+      const origen = document.getElementById('origen').value.toUpperCase();
+      const destino = document.getElementById('destino').value.toUpperCase();
+      let fechaIda = document.getElementById('fecha-ida').value;   // "2026-03-29"
+      let fechaVuelta = document.getElementById('fecha-vuelta').value;
 
-    if (!origen || !destino || !fechaIda || (!soloIda && !fechaVuelta)) {
+      if (!origen || !destino || !fechaIda || (!soloIda && !fechaVuelta)) {
         alert('Rellena todos los campos.');
         return;
-    }
+      }
 
-    // Formatear fechas a YYYYMMDD
-    fechaIda = fechaIda.replace(/-/g, '');       // "20260329"
-    if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, ''); // "20260405" por ejemplo
+      // Formatear fechas a YYYYMMDD
+      fechaIda = fechaIda.replace(/-/g, '');       // "20260329"
+      if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, ''); // "20260405" por ejemplo
 
-    // URL Skyscanner (España)
-    let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/`;
-    if (!soloIda && fechaVuelta) url += `${fechaVuelta}/`;
+      // URL Skyscanner (España)
+      let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/`;
+      if (!soloIda && fechaVuelta) url += `${fechaVuelta}/`;
 
-    window.open(url, '_blank');
-});
+      window.open(url, '_blank');
+    });
 
     // =============================
     // FUNCIONALIDAD OFERTAS Y FAVORITOS
@@ -200,7 +203,37 @@
       container.innerHTML = resultados.map(d => generarCard(d)).join('');
       activarFavoritos();
     }
+    const fechaIdaInput = document.getElementById('fecha-ida');
+    const fechaVueltaInput = document.getElementById('fecha-vuelta');
+
+    // Cambiar a date al hacer focus (abre calendario en móvil)
+    fechaIdaInput.addEventListener('focus', () => {
+      fechaIdaInput.type = 'date';
+    });
+
+    fechaVueltaInput.addEventListener('focus', () => {
+      fechaVueltaInput.type = 'date';
+    });
+
+    // Volver a text si está vacío (para que se vea bonito)
+    fechaIdaInput.addEventListener('blur', () => {
+      if (!fechaIdaInput.value) fechaIdaInput.type = 'text';
+    });
+
+    fechaVueltaInput.addEventListener('blur', () => {
+      if (!fechaVueltaInput.value) fechaVueltaInput.type = 'text';
+    });
+
+    fechaIdaInput.addEventListener('change', () => {
+      fechaIdaInput.type = 'date';
+    });
+
+    fechaVueltaInput.addEventListener('change', () => {
+      fechaVueltaInput.type = 'date';
+    });
+
   </script>
 
 </body>
+
 </html>

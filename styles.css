@@ -679,4 +679,38 @@ footer {
   }
 }
 
+.input-fecha {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+  position: relative;
+}
+
+/* Placeholder falso */
+.input-fecha:invalid {
+  color: #999;
+}
+
+/* Icono calendario bonito */
+.input-fecha::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* Para que no se vea raro en iOS */
+.input-fecha::-webkit-datetime-edit {
+  color: #333;
+}
+
+.input-fecha:invalid::-webkit-datetime-edit {
+  color: #999;
+}
+
+
 
