@@ -32,8 +32,16 @@
             <input type="text" id="origen" placeholder="Código IATA origen (ej: MAD)">
             <input type="text" id="destino" placeholder="Código IATA destino (ej: ROM)">
 
-            <input type="date" id="fecha-ida" placeholder="Fecha ida">
-            <input type="date" id="fecha-vuelta" placeholder="Fecha vuelta">
+            <div class="campo-fecha">
+              <p>Fecha ida</p>
+              <input type="date" id="fecha-ida" placeholder="Selecciona fecha">
+            </div>
+
+            <div class="campo-fecha">
+              <p>Fecha vuelta</p>
+              <input type="date" id="fecha-vuelta" placeholder="Selecciona fecha">
+            </div>
+
 
 
             <button class="btn" id="btn-buscar">Buscar vuelos</button>
@@ -108,14 +116,14 @@
     const fechaVueltaText = document.getElementById('fecha-vuelta-text');
 
     fechaIda.addEventListener('change', () => {
-      fechaIdaText.textContent = formatearFecha(fechaIda.value);
+      fechaIdaText.value = formatear(fechaIda.value);
     });
 
     fechaVuelta.addEventListener('change', () => {
-      fechaVueltaText.textContent = formatearFecha(fechaVuelta.value);
+      fechaVueltaText.value = formatear(fechaVuelta.value);
     });
 
-    function formatearFecha(fecha) {
+    function formatear(fecha) {
       const f = new Date(fecha);
       return f.toLocaleDateString('es-ES', {
         day: '2-digit',

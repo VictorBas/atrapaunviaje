@@ -763,6 +763,60 @@ input[type="date"] {
   background: white;
   font-family: inherit;
 }
+.campo-fecha p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.input-icono {
+  position: relative;
+  width: 93%;
+}
+
+/* Input visible */
+.input-icono input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  padding-right: 35px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+/* Icono */
+.icono {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* 🔥 CLAVE */
+}
+
+/* INPUT REAL (OCUPA TODO) */
+.real-date {
+  position: absolute;
+  inset: 0;          /* 🔥 ocupa TODO el contenedor */
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+
+  z-index: 2;
+
+}
+
+.campo-fecha input[type="date"] {
+  width: 95%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  cursor: pointer;
+}
+#btn-buscar{
+  margin-top: 15px;
+}
 
 
 
