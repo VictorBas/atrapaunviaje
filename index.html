@@ -1,190 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Atrapa un Viaje</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 
-<header class="header">
-  <h1>Atrapa un Viaje ✈️</h1>
-  <p>Vuelos baratos y escapadas inolvidables</p>
-</header>
+<body class="index">
 
-<main>
+  <header class="header">
+    <h1>Atrapa un Viaje ✈️</h1>
+    <p>Vuelos baratos y escapadas inolvidables</p>
+  </header>
 
-<section class="hero">
-  <div class="hero-grid">
+  <main>
+    <section class="hero">
+      <div class="hero-grid-3cols">
 
-    <!-- BUSCADOR PRINCIPAL (Skyscanner) -->
-    <div class="buscador">
-      <h2>Busca tu vuelo ideal 🌍</h2>
-      <div class="search-bar">
-        <input type="text" id="origen" placeholder="Origen (ej: Madrid)">
-        <input type="text" id="destino" placeholder="Destino (ej: Roma)">
-        <input type="number" id="dias" placeholder="Duración (días)">
-        <button class="btn" onclick="window.open('https://www.skyscanner.es/','_blank')">Buscar vuelos</button>
-      </div>
-    </div>
+        <!-- IZQUIERDA: BUSCADOR FUNCIONAL -->
+        <div class="buscador">
+          <h2>Busca tu vuelo ideal 🌍</h2>
 
-    <div class="separator"></div>
+          <button id="btn-toggle-vuelo" class="btn" style="width:auto; padding:6px 12px; font-size:14px; margin-bottom:10px;">Modo: Ida y vuelta</button>
 
-    <!-- OFERTAS DINÁMICAS + MINI BUSCADOR -->
-    <div class="ofertas-hero">
-      <h2>Ofertas seleccionadas ✨</h2>
-      <div class="cards-hero" id="cards-hero">
-        <!-- Aquí se generarán las ofertas -->
-      </div>
-
-      <!-- MINI BUSCADOR INTERACTIVO -->
-      <section class="buscador-interactivo">
-        <h3>Filtra tus destinos favoritos 🔎</h3>
-        <div class="search-bar-interactivo">
-          <input type="text" id="mini-destino" placeholder="Destino (ej: París)">
-          <input type="number" id="mini-dias" placeholder="Duración (días)">
-          <button class="btn" onclick="buscarMini()">Buscar</button>
+          <div class="search-bar">
+            <input type="text" id="origen" placeholder="Código IATA origen (ej: MAD)">
+            <input type="text" id="destino" placeholder="Código IATA destino (ej: ROM)">
+            <input type="date" id="fecha-ida">
+            <input type="date" id="fecha-vuelta">
+            <button class="btn" id="btn-buscar">Buscar vuelos</button>
+          </div>
         </div>
-        <div id="resultados-mini" class="cards-mini">
-          <!-- Aquí aparecerán los resultados filtrados -->
+
+        <!-- CENTRO: OFERTAS -->
+        <div class="ofertas-hero">
+          <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 15px;">
+            <h2>Ofertas seleccionadas ✨</h2>
+            <button id="btn-fav-toggle" class="btn" style="width:auto; padding:6px 12px; font-size:14px;">Mostrar favoritos</button>
+          </div>
+          <div class="cards-hero" id="cards-hero">
+            <!-- Ofertas generadas por JS -->
+          </div>
         </div>
-      </section>
 
-    </div>
+        <!-- DERECHA: MINI BUSCADOR INTERACTIVO -->
+        <div class="mini-buscador">
+          <h3>Filtra tus destinos favoritos 🔎</h3>
+          <div class="search-bar-interactivo">
+            <input type="text" id="mini-destino" placeholder="Destino (ej: París)">
+            <input type="number" id="mini-dias" placeholder="Duración (días)">
+            <button class="btn" onclick="buscarMini()">Buscar</button>
+          </div>
+          <div id="resultados-mini" class="cards-hero">
+            <!-- Aquí aparecerán los resultados filtrados -->
+          </div>
+        </div>
 
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <p>© 2026 Atrapa un Viaje</p>
-</footer>
-
-<script>
-let destinos = [];
-
-// Cargar destinos desde JSON
-fetch('destinos.json')
-  .then(res => res.json())
-  .then(data => {
-    destinos = data;
-    mostrarOfertas(destinos); // Mostrar todas las ofertas al inicio
-  });
-
-// Mostrar ofertas en la sección principal (hero)
-function mostrarOfertas(lista) {
-  const container = document.getElementById('cards-hero');
-  if(lista.length === 0){
-    container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-    return;
-  }
-  container.innerHTML = lista.map(d => `
-    <div class="card">
-      <h3>${d.nombre}</h3>
-      <p><strong>${d.dias} días</strong></p>
-      <p>📅 ${d.fechas}</p>
-      <p>✈️ ${d.vuelo}€ ida y vuelta</p>
-      <p>⏱️ ${d.vuelo_tiempo}</p>
-      <p>🏨 <strong>${d.hotel}</strong> ${d.hotel_precio}€</p>
-
-      <!-- Botón de favoritos -->
-      <div style="display:flex; align-items:center; gap:8px;">
-        <img class="favorito" 
-             src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png" 
-             alt="Favorito" 
-             title="Añadir a favoritos"
-             style="width:25px; cursor:pointer;" data-fav="false">
-        <span class="msg-fav" style="color:#ffd700; font-weight:bold;"></span>
       </div>
+    </section>
+  </main>
 
-      <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">Ver detalles</button>
-    </div>
-  `).join('');
+  <footer>
+    <p>© 2026 Atrapa un Viaje</p>
+  </footer>
 
-  activarFavoritos();
-}
+  <script>
+    let destinos = [];
+    let soloIda = false;
 
-// Función del mini-buscador interactivo
-function buscarMini() {
-  const destinoVal = document.getElementById('mini-destino').value.toLowerCase();
-  const diasVal = parseInt(document.getElementById('mini-dias').value);
+    // Cargar destinos desde JSON
+    fetch('destinos.json')
+      .then(res => res.json())
+      .then(data => {
+        destinos = data;
+        mostrarOfertas(destinos); // Mostrar todas las ofertas al inicio
+      });
 
-  const resultados = destinos.filter(d => {
-    return d.nombre.toLowerCase().includes(destinoVal) && (!diasVal || d.dias == diasVal);
-  });
+    // =============================
+    // BUSCADOR FUNCIONAL SKYCANNER
+    // =============================
+    const btnToggleVuelo = document.getElementById('btn-toggle-vuelo');
+    btnToggleVuelo.addEventListener('click', () => {
+      soloIda = !soloIda;
+      document.getElementById('fecha-vuelta').style.display = soloIda ? 'none' : 'block';
+      btnToggleVuelo.textContent = soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
+    });
 
-  const container = document.getElementById('resultados-mini');
+    document.getElementById('btn-buscar').addEventListener('click', () => {
+    const origen = document.getElementById('origen').value.toUpperCase();
+    const destino = document.getElementById('destino').value.toUpperCase();
+    let fechaIda = document.getElementById('fecha-ida').value;   // "2026-03-29"
+    let fechaVuelta = document.getElementById('fecha-vuelta').value;
 
-  if(resultados.length === 0){
-    container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-    return;
-  }
-
-  container.innerHTML = resultados.map(d => `
-    <div class="card">
-      <h3>${d.nombre}</h3>
-      <p><strong>${d.dias} días</strong></p>
-      <p>📅 ${d.fechas}</p>
-      <p>✈️ ${d.vuelo}€ ida y vuelta</p>
-      <p>⏱️ ${d.vuelo_tiempo}</p>
-      <p>🏨 <strong>${d.hotel}</strong> ${d.hotel_precio}€</p>
-
-      <!-- Botón de favoritos -->
-      <div style="display:flex; align-items:center; gap:8px;">
-        <img class="favorito" 
-             src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png" 
-             alt="Favorito" 
-             title="Añadir a favoritos"
-             style="width:25px; cursor:pointer;" data-fav="false">
-        <span class="msg-fav" style="color:#ffd700; font-weight:bold;"></span>
-      </div>
-
-      <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">Ver detalles</button>
-    </div>
-  `).join('');
-
-  activarFavoritos();
-}
-
-// Función que activa la estrella de favoritos con mensaje de texto
-function activarFavoritos(){
-  const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-  document.querySelectorAll('.favorito').forEach(star => {
-    const card = star.closest('.card');
-    const slug = card.querySelector('button').getAttribute('onclick').match(/slug=([^']+)/)[1];
-
-    // Si el destino está en favoritos, marcar la estrella amarilla
-    if(favoritos.includes(slug)){
-      star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-      star.dataset.fav = "true";
+    if (!origen || !destino || !fechaIda || (!soloIda && !fechaVuelta)) {
+        alert('Rellena todos los campos.');
+        return;
     }
 
-    // Click en la estrella
-    star.addEventListener('click', () => {
-      let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    // Formatear fechas a YYYYMMDD
+    fechaIda = fechaIda.replace(/-/g, '');       // "20260329"
+    if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, ''); // "20260405" por ejemplo
 
-      if(star.dataset.fav === "true"){
-        // Quitar de favoritos
-        star.src = "https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png";
-        star.dataset.fav = "false";
-        favoritos = favoritos.filter(f => f !== slug);
-      } else {
-        // Añadir a favoritos
-        star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-        star.dataset.fav = "true";
-        if(!favoritos.includes(slug)) favoritos.push(slug);
+    // URL Skyscanner (España)
+    let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/`;
+    if (!soloIda && fechaVuelta) url += `${fechaVuelta}/`;
+
+    window.open(url, '_blank');
+});
+
+    // =============================
+    // FUNCIONALIDAD OFERTAS Y FAVORITOS
+    // =============================
+    function generarCard(d) {
+      return `
+        <div class="card">
+          <h3 style="color:#0070f3;">${d.nombre}</h3>
+          <p><strong>${d.dias} días</strong></p>
+          <p>📅 ${d.fechas}</p>
+          <p>✈️ ${d.vuelo}€ ida y vuelta</p>
+          <p>⏱️ ${d.vuelo_tiempo}</p>
+          <p>🏨 <strong>${d.hotel}</strong> ${d.hotel_precio}€</p>
+
+          <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
+            <img class="favorito" 
+                 src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png" 
+                 alt="Favorito" 
+                 title="Añadir a favoritos"
+                 style="width:25px; cursor:pointer;" data-fav="false">
+          </div>
+
+          <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">Ver detalles</button>
+        </div>`;
+    }
+
+    function mostrarOfertas(lista) {
+      const container = document.getElementById('cards-hero');
+      if (lista.length === 0) {
+        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
+        return;
       }
+      container.innerHTML = lista.map(d => generarCard(d)).join('');
+      activarFavoritos();
+    }
 
-      // Guardar en localStorage
-      localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    function activarFavoritos() {
+      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+      document.querySelectorAll('.favorito').forEach(star => {
+        const card = star.closest('.card');
+        const slug = card.querySelector('button').getAttribute('onclick').match(/slug=([^']+)/)[1];
+        if (favoritos.includes(slug)) {
+          star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
+          star.dataset.fav = "true";
+        }
+
+        star.onclick = () => {
+          let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+          if (star.dataset.fav === "true") {
+            star.src = "https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png";
+            star.dataset.fav = "false";
+            favoritos = favoritos.filter(f => f !== slug);
+          } else {
+            star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
+            star.dataset.fav = "true";
+            if (!favoritos.includes(slug)) favoritos.push(slug);
+          }
+          localStorage.setItem('favoritos', JSON.stringify(favoritos));
+        }
+      });
+    }
+
+    // Botón mostrar favoritos
+    let mostrandoFavoritos = false;
+    document.getElementById('btn-fav-toggle').addEventListener('click', () => {
+      const btn = document.getElementById('btn-fav-toggle');
+      mostrandoFavoritos = !mostrandoFavoritos;
+      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+      if (mostrandoFavoritos) {
+        mostrarOfertas(destinos.filter(d => favoritos.includes(d.slug)));
+        btn.textContent = "Mostrar todos";
+      } else {
+        mostrarOfertas(destinos);
+        btn.textContent = "Mostrar favoritos";
+      }
     });
-  });
-}
 
-</script>
+    // Mini-buscador interactivo
+    function buscarMini() {
+      const destinoVal = document.getElementById('mini-destino').value.toLowerCase();
+      const diasVal = parseInt(document.getElementById('mini-dias').value);
+      const resultados = destinos.filter(d => d.nombre.toLowerCase().includes(destinoVal) && (!diasVal || d.dias == diasVal));
+      const container = document.getElementById('resultados-mini');
+      if (resultados.length === 0) {
+        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
+        return;
+      }
+      container.innerHTML = resultados.map(d => generarCard(d)).join('');
+      activarFavoritos();
+    }
+  </script>
 
 </body>
 </html>
