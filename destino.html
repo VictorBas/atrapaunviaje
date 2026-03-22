@@ -20,17 +20,24 @@
   </div>
 </header>
 
+<main>
 
-<section id="hero-destino" class="hero-destino">
-  <div class="hero-grid">
-    <div class="detalle-viaje" id="detalle-viaje"></div>
-  </div>
-</section>
+  <!-- HERO DESTINO -->
+  <section id="hero-destino" class="hero-destino">
+    <div id="detalle-viaje" class="detalle-viaje-pro">
+      <!-- Se llena con JS -->
+    </div>
+  </section>
 
-<section class="itinerario">
-  <h2>Itinerario recomendado</h2>
-  <div class="dias" id="dias-itinerario"></div>
-</section>
+  <!-- ITINERARIO -->
+  <section class="itinerario">
+    <h2>Itinerario recomendado</h2>
+    <div class="dias" id="dias-itinerario">
+      <!-- Se llena con JS -->
+    </div>
+  </section>
+
+</main>
 
 <footer>
   <p>© 2026 Atrapa un Viaje</p>
@@ -45,22 +52,42 @@ fetch('destinos.json')
   .then(data => {
     const destino = data.find(d => d.slug === slug);
     if(destino){
+      // Fondo hero
       const hero = document.getElementById('hero-destino');
       hero.style.backgroundImage = `url(${destino.imagen})`;
 
+      // Detalle viaje con columnas vuelo/hotel
       const detalle = document.getElementById('detalle-viaje');
       detalle.innerHTML = `
-        <h2>${destino.nombre} - ${destino.dias} días</h2>
-        <p>Vuelo: ${destino.vuelo}€ ida y vuelta</p>
-        <button class="btn" onclick="window.open('https://www.skyscanner.es/transport/flights/mad/${destino.slug}/','_blank')">Reservar vuelo</button>
-        <p>Hotel recomendado: <strong>${destino.hotel}</strong> ${destino.hotel_precio}€</p>
+        <div class="viaje-col">
+          <h2>✈️ ${destino.nombre} - ${destino.dias} días</h2>
+          <p>📅 Fechas: ${destino.fechas}</p>
+          <p>🛫 Vuelo ida y vuelta: ${destino.vuelo}€</p>
+          <p>⏱️ Duración aproximada: ${destino.vuelo_tiempo}</p>
+          <button class="btn" onclick="window.open('https://www.skyscanner.es/transport/flights/mad/${destino.slug}/','_blank')">
+            Reservar vuelo
+          </button>
+        </div>
+
+        <div class="viaje-col">
+          <h2>🏨 Hotel recomendado</h2>
+          <p>📍 ${destino.hotel}</p>
+          <p>💰 Precio por noche: ${destino.hotel_precio}€</p>
+          <p>💡 Tip: Reserva pronto para mejores precios</p>
+          <button class="btn-azul" onclick="window.open('${destino.hotel_link}','_blank')">
+            Reservar hotel
+          </button>
+        </div>
       `;
 
+      // Itinerario en 3 cards por fila
       const diasIt = document.getElementById('dias-itinerario');
-      diasIt.innerHTML = destino.itinerario.map((d,i)=>`
-        <div class="dia">
-          <h3>Día ${i+1}</h3>
-          <p>${d}</p>
+      diasIt.innerHTML = destino.itinerario.map(d => `
+        <div class="itinerario-card">
+          <h3>${d.dia}</h3>
+          <p><strong>🌅 Mañana:</strong> ${d.manana}</p>
+          <p><strong>🌇 Tarde:</strong> ${d.tarde}</p>
+          <p><strong>🌙 Noche:</strong> ${d.noche}</p>
         </div>
       `).join('');
     }

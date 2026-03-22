@@ -1,16 +1,19 @@
 /* ======================== */
 /*        BODY & BASE       */
 /* ======================== */
-body {
+html, body {
+  height: 100%;
   margin: 0;
   font-family: 'Arial', sans-serif;
   background: #f0f4f8;
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
-  margin-top: 0;
-}
+main { flex: 1; }
+
+h2 { margin-top: 0; }
 
 /* ======================== */
 /*         HEADER           */
@@ -19,7 +22,7 @@ h2 {
   background: linear-gradient(90deg, #0070f3, #00c6ff);
   color: white;
   text-align: center;
-  padding: 12px 20px; /* altura reducida */
+  padding: 12px 20px;
 }
 
 .header-grid {
@@ -39,27 +42,30 @@ h2 {
   font-size: 14px; 
 }
 
-/* Botón volver inicio */
-.btn-volver {
+/* ======================== */
+/*        BOTONES           */
+/* ======================== */
+
+/* Estilo base de todos los botones */
+button, .btn-volver, .cards-hero .btn, .search-bar .btn, .hotel-btn {
   position: relative;
-  display: inline-block;
   padding: 10px 20px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
   border-radius: 8px;
-  overflow: hidden;
-  z-index: 0;
+  border: none;
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
-  background: #ff7a18; /* color base */
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #ff7a18; /* color base fijo */
 }
 
-.btn-volver:hover {
-  transform: scale(1.05);
-}
-
-.btn-volver:hover::before {
+/* Hover: aparece el gradiente animado */
+button:hover::before,
+.btn-volver:hover::before,
+.cards-hero .btn:hover::before,
+.search-bar .btn:hover::before,
+.hotel-btn:hover::before {
   content: "";
   position: absolute;
   top: -50%;
@@ -72,6 +78,31 @@ h2 {
   filter: blur(8px);
   border-radius: 8px;
   animation: gradientMove 4s ease infinite;
+}
+
+/* Hover: efecto pequeño de escalado */
+button:hover,
+.btn-volver:hover,
+.cards-hero .btn:hover,
+.search-bar .btn:hover,
+.hotel-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Animación del gradiente */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Botón de hotel diferente */
+.btn-azul {
+  background: #0070f3;
+}
+
+.btn-azul:hover::before {
+  background: linear-gradient(45deg, #0070f3, #00c6ff, #1abc9c, #f1c40f);
 }
 
 /* ======================== */
@@ -96,17 +127,14 @@ h2 {
   flex-wrap: wrap;
 }
 
-/* ===== BUSCADOR ===== */
+/* ===== BUSCADOR IZQUIERDA ===== */
 .buscador {
   flex: 1;
   min-width: 280px;
   max-width: 400px;
 }
 
-.buscador h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+.buscador h2 { font-size: 24px; margin-bottom: 10px; }
 
 .search-bar input {
   width: 95%;
@@ -114,41 +142,6 @@ h2 {
   margin: 5px 0;
   border-radius: 5px;
   border: none;
-}
-
-.search-bar .btn {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  padding: 12px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  overflow: hidden;
-  z-index: 0;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
-  background: #ff7a18;
-}
-
-.search-bar .btn:hover {
-  transform: scale(1.05);
-}
-
-.search-bar .btn:hover::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
-  background-size: 400% 400%;
-  z-index: -1;
-  filter: blur(8px);
-  border-radius: 8px;
-  animation: gradientMove 4s ease infinite;
 }
 
 /* ===== SEPARADOR BLANCO ===== */
@@ -165,11 +158,8 @@ h2 {
   min-width: 300px;
 }
 
-.ofertas-hero h2 {
-  margin-bottom: 15px;
-}
+.ofertas-hero h2 { margin-bottom: 15px; }
 
-/* Grid de 3 columnas para ofertas */
 .cards-hero {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -184,137 +174,194 @@ h2 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.cards-hero .card h3 {
-  margin-top: 0;
-  color: #0070f3;
-}
-
-.cards-hero .card p {
-  font-size: 14px;
-  margin: 5px 0;
-}
-
-.cards-hero .btn {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  padding: 12px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  overflow: hidden;
-  z-index: 0;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
-  background: #ff7a18;
-}
-
-.cards-hero .btn:hover {
-  transform: scale(1.05);
-}
-
-.cards-hero .btn:hover::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
-  background-size: 400% 400%;
-  z-index: -1;
-  filter: blur(8px);
-  border-radius: 8px;
-  animation: gradientMove 4s ease infinite;
-}
+.cards-hero .card h3 { margin-top: 0; color: #0070f3; }
+.cards-hero .card p { font-size: 14px; margin: 5px 0; }
 
 /* ======================== */
 /* HERO DESTINO DINÁMICO */
 .hero-destino {
+  width: 100%;
+  min-height: 400px;
   background-size: cover;
   background-position: center;
-  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
   color: white;
-  border-radius: 15px;
-}
-
-.hero-destino .detalle-viaje {
-  background: rgba(0,0,0,0.6);
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-}
-
-.hero-destino .btn {
   position: relative;
-  display: inline-block;
-  padding: 12px 20px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  overflow: hidden;
-  z-index: 0;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
-  background: #ff7a18;
 }
 
-.hero-destino .btn:hover {
-  transform: scale(1.05);
+.detalle-viaje-pro {
+  display: flex;
+  gap: 40px;
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1000px;
+  flex-wrap: wrap;
 }
 
-.hero-destino .btn:hover::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
-  background-size: 400% 400%;
-  z-index: -1;
-  filter: blur(8px);
-  border-radius: 8px;
-  animation: gradientMove 4s ease infinite;
+.viaje-col {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
+
+.viaje-col h2 { font-size: 24px; margin-bottom: 10px; }
+.viaje-col p { font-size: 15px; line-height: 1.5; }
 
 /* ======================== */
 /* ITINERARIO */
 .itinerario {
   padding: 40px 20px;
   text-align: center;
+  width: 100%;
+  max-width: 1680px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.itinerario h2 {
-  margin-bottom: 25px;
-}
+.itinerario h2 { margin-bottom: 25px; }
 
 .dias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin: 20px 0;
+}
+
+.itinerario-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  min-height: 220px;
+}
+
+.itinerario-card:hover { transform: translateY(-8px); }
+
+.itinerario-card h3 { margin-bottom: 8px; font-size: 18px; }
+.itinerario-card p { font-size: 13px; line-height: 1.3; margin-bottom: 6px; }
+
+.itinerario-card .bloques {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+/* ======================== */
+/* MINI BUSCADOR INTERACTIVO DERECHA */
+.buscador-interactivo {
+  margin-top: 20px;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buscador-interactivo h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.search-bar-interactivo {
+  display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-bar-interactivo input {
+  padding: 10px;
+  flex: 1 1 120px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.9);
+}
+
+/* ===== MINI-BUSCADOR INTERACTIVO (botón) ===== */
+
+/* Estilo base del botón (sin animación) */
+.search-bar-interactivo button {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #ff7a18; /* color base fijo */
+}
+
+/* Hover: aparece el gradiente animado */
+.search-bar-interactivo button:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* Hover: efecto de escalado */
+.search-bar-interactivo button:hover {
+  transform: scale(1.05);
+}
+
+
+/* Resultados filtrados del mini-buscador */
+.cards-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
   justify-content: center;
 }
 
-.dia {
-  background: white;
-  border-radius: 10px;
+.cards-mini .card {
+  background: #fff;
+  border-radius: 12px;
   padding: 15px;
-  width: 250px;
+  flex: 1 1 calc(33.333% - 10px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.dia h3 {
-  margin-top: 0;
-  color: #0070f3;
+.cards-mini .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
-.dia p {
-  font-size: 14px;
-  margin: 5px 0;
+.cards-mini .card .btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
 }
+
+@media (max-width: 1200px) { .cards-hero { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  .hero-grid { flex-direction: column; gap: 20px; }
+  .separator { display: none; }
+  .cards-hero { grid-template-columns: 1fr; }
+  .dias { grid-template-columns: repeat(2, 1fr); }
+  .detalle-viaje-pro { flex-direction: column; gap: 20px; }
+}
+@media (max-width: 600px) { .dias { grid-template-columns: 1fr; } }
 
 /* ======================== */
 /* FOOTER */
@@ -326,38 +373,140 @@ footer {
   margin-top: 20px;
 }
 
-/* ======================== */
-/* ANIMACIÓN GRADIENTE BOTONES */
-@keyframes gradientMove {
+/* Botón del buscador principal (hero izquierdo) */
+.search-bar .btn {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* ⚡ igual que los inputs */
+  padding: 12px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18; /* color base */
+}
+
+/* Hover: gradiente animado solo al pasar el cursor */
+.search-bar .btn:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* Hover: pequeño efecto de escalado */
+.search-bar .btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-azul:hover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #0070f3, #00c6ff, #1abc9c, #f1c40f);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 8px;
+  animation: gradientMoveAzul 4s ease infinite;
+}
+
+/* Hover: pequeño efecto de escalado */
+.btn-azul:hover {
+  transform: scale(1.05);
+  position: relative;
+}
+
+/* Animación del gradiente */
+@keyframes gradientMoveAzul {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* ======================== */
-/* RESPONSIVE */
-@media(max-width: 1200px) {
-  .cards-hero {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.btn-volver {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden; /* importante para que ::before no se salga */
+  z-index: 0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  background: #ff7a18; /* color base fijo */
 }
 
-@media(max-width: 900px) {
-  .hero-grid {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .separator {
-    display: none;
-  }
-
-  .cards-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .dias {
-    flex-direction: column;
-    align-items: center;
-  }
+.btn-volver:hover {
+  transform: scale(1.05);
 }
+
+.btn-volver:hover::before {
+  content: "";
+  position: absolute;
+  top: -20%;   /* 🔹 menos que antes */
+  left: -20%;  /* 🔹 menos que antes */
+  width: 140%; /* 🔹 antes era 200% */
+  height: 140%;/* 🔹 antes era 200% */
+  background: linear-gradient(45deg, #ff416c, #ff7a18, #ffb347, #ff416c);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(6px); /* 🔹 menos blur para que no se desborde */
+  border-radius: 8px;
+  animation: gradientMove 4s ease infinite;
+}
+
+.cards-hero .card {
+  position: relative; /* para que el icono se coloque dentro */
+}
+
+
+
+.favorito.fav-selected {
+  color: gold; /* relleno cuando es favorito */
+}
+
+
+.favorito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.fav-msg {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+

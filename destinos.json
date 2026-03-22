@@ -3,60 +3,148 @@
     "slug": "roma",
     "nombre": "Roma",
     "dias": 4,
+    "fechas": "18 junio - 22 junio",
     "vuelo": 40,
+    "vuelo_tiempo": "2h 10min",
     "hotel": "Hotel Roma Central",
     "hotel_precio": 120,
+    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
     "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/09/19/coliseo_9b206d89_240919151753_1280x853.jpg",
     "itinerario": [
-      "Coliseo, Fontana di Trevi, Piazza Venezia",
-      "Vaticano, Plaza de San Pedro, Museos Vaticanos",
-      "Trastevere, Campo de’ Fiori, compras y restaurantes locales",
-      "Paseo final por plazas y despedida"
-    ]
+  {
+    "dia": "Día 1",
+    "manana": "Paseamos por la Fontana di Trevi y el centro histórico, disfrutando de sus calles y ambiente.",
+    "tarde": "Visitamos el Coliseo romano y el Foro, una de las zonas más impresionantes de Roma.",
+    "noche": "Cena en el barrio de Trastevere, perfecto para disfrutar del ambiente local."
+  },
+  {
+    "dia": "Día 2",
+    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
+    "tarde": "Museos Vaticanos y Capilla Sixtina.",
+    "noche": "Paseo nocturno por el centro de Roma."
+  },
+  {
+    "dia": "Día 3",
+    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
+    "tarde": "Museos Vaticanos y Capilla Sixtina.",
+    "noche": "Paseo nocturno por el centro de Roma."
+  },
+  {
+    "dia": "Día 4",
+    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
+    "tarde": "Museos Vaticanos y Capilla Sixtina.",
+    "noche": "Paseo nocturno por el centro de Roma."
+  }
+]
+
   },
   {
     "slug": "paris",
     "nombre": "París",
-    "dias": 5,
-    "vuelo": 50,
-    "hotel": "Hotel París Centro",
-    "hotel_precio": 150,
-    "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/02/14/torre-eiffel_6e9796fd_278483323_240214093442_1280x853.jpg",
+    "dias": 4,
+    "fechas": "10 julio - 14 julio",
+    "vuelo": 55,
+    "vuelo_tiempo": "2h 15min",
+    "hotel": "Hotel Eiffel View",
+    "hotel_precio": 140,
+    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
+    "imagen": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
     "itinerario": [
-      "Torre Eiffel, Campos Elíseos",
-      "Museo del Louvre, Jardines de las Tullerías",
-      "Montmartre, Sacré-Cœur, Moulin Rouge",
-      "Barrio Latino, Notre-Dame, compras",
-      "Paseo final por la ciudad y despedida"
+      {
+        "dia": "Día 1",
+        "manana": "Paseamos por la Torre Eiffel y alrededores.",
+        "tarde": "Visitamos el Museo del Louvre.",
+        "noche": "Cena en Montmartre y paseo nocturno."
+      },
+      {
+        "dia": "Día 2",
+        "manana": "Campos Elíseos y Arco del Triunfo.",
+        "tarde": "Notre Dame y Sainte-Chapelle.",
+        "noche": "Crucero por el Sena."
+      },
+      {
+        "dia": "Día 3",
+        "manana": "Palacio de Versalles.",
+        "tarde": "Barrio Latino y Panthéon.",
+        "noche": "Cena típica francesa cerca del Sena."
+      },
+      {
+        "dia": "Día 4",
+        "manana": "Mercados locales y compras.",
+        "tarde": "Relajarnos en Jardines de Luxemburgo.",
+        "noche": "Regreso al hotel y salida."
+      }
     ]
   },
   {
     "slug": "londres",
     "nombre": "Londres",
     "dias": 3,
+    "fechas": "5 agosto - 8 agosto",
     "vuelo": 60,
-    "hotel": "Hotel Londres Central",
-    "hotel_precio": 100,
+    "vuelo_tiempo": "2h 30min",
+    "hotel": "London Central Hotel",
+    "hotel_precio": 130,
+    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
     "imagen": "https://as2.ftcdn.net/v2/jpg/01/35/61/33/1000_F_135613354_mBHFo7PIVm6hu7iMHy8IoE0WuCRcoe1Q.jpg",
     "itinerario": [
-      "London Eye, Big Ben, Westminster",
-      "Museo Británico, Covent Garden",
-      "Camden Market y despedida"
+      {
+        "dia": "Día 1",
+        "manana": "Tower Bridge y Torre de Londres.",
+        "tarde": "Paseo por South Bank y London Eye.",
+        "noche": "Cena en Covent Garden."
+      },
+      {
+        "dia": "Día 2",
+        "manana": "Museo Británico.",
+        "tarde": "Palacio de Buckingham y cambio de guardia.",
+        "noche": "Paseo por Piccadilly Circus y Soho."
+      },
+      {
+        "dia": "Día 3",
+        "manana": "Camden Market y paseo por Regent's Canal.",
+        "tarde": "Hyde Park y Harrods.",
+        "noche": "Cena cerca de Tower Bridge y regreso."
+      }
     ]
   },
   {
-  "slug": "lisboa",
-  "nombre": "Lisboa",
-  "dias": 3,
-  "vuelo": 70,
-  "hotel": "Hotel Lisboa Centro",
-  "hotel_precio": 120,
-  "imagen": "https://cdn2.civitatis.com/portugal/lisboa/guia/lisbon-tram-seo.jpg",
-  "itinerario": [
-    "Barrio de Alfama, Catedral de Lisboa",
-    "Plaza del Comercio y Elevador de Santa Justa",
-    "Belém, Torre de Belém y pastel de nata"
-  ]
-}
+    "slug": "lisboa",
+    "nombre": "Lisboa",
+    "dias": 4,
+    "fechas": "20 septiembre - 24 septiembre",
+    "vuelo": 50,
+    "vuelo_tiempo": "2h 45min",
+    "hotel": "Lisbon Downtown Hotel",
+    "hotel_precio": 110,
+    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
+    "imagen": "https://cdn2.civitatis.com/portugal/lisboa/guia/lisbon-tram-seo.jpg",
+    "itinerario": [
+      {
+        "dia": "Día 1",
+        "manana": "Barrio de Alfama y Castillo de San Jorge.",
+        "tarde": "Paseo por Praça do Comércio y Baixa.",
+        "noche": "Cena con fado en Bairro Alto."
+      },
+      {
+        "dia": "Día 2",
+        "manana": "Torre de Belém y Monasterio de los Jerónimos.",
+        "tarde": "Paseo por la ribera del río Tajo.",
+        "noche": "Disfrutar de la vida nocturna en Cais do Sodré."
+      },
+      {
+        "dia": "Día 3",
+        "manana": "Excursión a Sintra y Palacio da Pena.",
+        "tarde": "Visita a Quinta da Regaleira.",
+        "noche": "Regreso a Lisboa y cena típica portuguesa."
+      },
+      {
+        "dia": "Día 4",
+        "manana": "Tranvía 28 y paseo por Graça y Mouraria.",
+        "tarde": "Compras en Chiado.",
+        "noche": "Última cena y regreso al hotel."
+      }
+    ]
+  }
 
 ]

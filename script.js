@@ -23,3 +23,5 @@ function verOferta(destino) {
 function leerArticulo(slug) {
   alert(`Abriendo artículo: ${slug}`);
 }
+
+
