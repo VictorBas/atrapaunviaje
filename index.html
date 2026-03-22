@@ -19,18 +19,25 @@
     <section class="hero">
       <div class="hero-grid-3cols">
 
-        <!-- IZQUIERDA: BUSCADOR FUNCIONAL -->
+        <!-- IZQUIERDA: BUSCADOR -->
         <div class="buscador">
           <h2>Busca tu vuelo ideal 🌍</h2>
 
-          <button id="btn-toggle-vuelo" class="btn"
-            style="width:auto; padding:6px 12px; font-size:14px; margin-bottom:10px;">Modo: Ida y vuelta</button>
+          <button id="btn-toggle-vuelo" class="btn" style="margin-bottom:10px;">
+            Modo: Ida y vuelta
+          </button>
 
           <div class="search-bar">
             <input type="text" id="origen" placeholder="Código IATA origen (ej: MAD)">
             <input type="text" id="destino" placeholder="Código IATA destino (ej: ROM)">
-            <input type="date" id="fecha-ida" class="input-fecha" required>
-            <input type="date" id="fecha-vuelta" class="input-fecha" required>
+
+            <!-- INPUTS VISIBLES -->
+            <input type="text" id="fecha-ida-text" placeholder="Fecha ida" readonly>
+            <input type="text" id="fecha-vuelta-text" placeholder="Fecha vuelta" readonly>
+
+            <!-- INPUTS OCULTOS -->
+            <input type="date" id="fecha-ida" style="position:absolute; opacity:0;">
+            <input type="date" id="fecha-vuelta" style="position:absolute; opacity:0;">
 
             <button class="btn" id="btn-buscar">Buscar vuelos</button>
           </div>
@@ -38,27 +45,25 @@
 
         <!-- CENTRO: OFERTAS -->
         <div class="ofertas-hero">
-          <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 15px;">
+          <div style="display:flex; justify-content: space-between; margin-bottom:15px;">
             <h2>Ofertas seleccionadas ✨</h2>
-            <button id="btn-fav-toggle" class="btn" style="width:auto; padding:6px 12px; font-size:14px;">Mostrar
-              favoritos</button>
+            <button id="btn-fav-toggle" class="btn" style="width:auto;">Mostrar favoritos</button>
           </div>
-          <div class="cards-hero" id="cards-hero">
-            <!-- Ofertas generadas por JS -->
-          </div>
+
+          <div class="cards-hero" id="cards-hero"></div>
         </div>
 
-        <!-- DERECHA: MINI BUSCADOR INTERACTIVO -->
+        <!-- DERECHA: MINI BUSCADOR -->
         <div class="mini-buscador">
           <h3>Filtra tus destinos favoritos 🔎</h3>
+
           <div class="search-bar-interactivo">
             <input type="text" id="mini-destino" placeholder="Destino (ej: París)">
             <input type="number" id="mini-dias" placeholder="Duración (días)">
             <button class="btn" onclick="buscarMini()">Buscar</button>
           </div>
-          <div id="resultados-mini" class="cards-hero">
-            <!-- Aquí aparecerán los resultados filtrados -->
-          </div>
+
+          <div id="resultados-mini" class="cards-hero"></div>
         </div>
 
       </div>
@@ -73,167 +78,130 @@
     let destinos = [];
     let soloIda = false;
 
-    // Cargar destinos desde JSON
+    // =============================
+    // CARGAR DATOS
+    // =============================
     fetch('destinos.json')
       .then(res => res.json())
       .then(data => {
         destinos = data;
-        mostrarOfertas(destinos); // Mostrar todas las ofertas al inicio
+        mostrarOfertas(destinos);
       });
 
     // =============================
-    // BUSCADOR FUNCIONAL SKYCANNER
+    // TOGGLE IDA / VUELTA
     // =============================
-    const btnToggleVuelo = document.getElementById('btn-toggle-vuelo');
-    btnToggleVuelo.addEventListener('click', () => {
+    document.getElementById('btn-toggle-vuelo').addEventListener('click', () => {
       soloIda = !soloIda;
-      document.getElementById('fecha-vuelta').style.display = soloIda ? 'none' : 'block';
-      btnToggleVuelo.textContent = soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
+
+      document.getElementById('fecha-vuelta-text').style.display = soloIda ? 'none' : 'block';
+
+      document.getElementById('btn-toggle-vuelo').textContent =
+        soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
     });
 
+    // =============================
+    // CALENDARIO (FIX IOS)
+    // =============================
+    const fechaIdaText = document.getElementById('fecha-ida-text');
+    const fechaVueltaText = document.getElementById('fecha-vuelta-text');
+
+    const fechaIda = document.getElementById('fecha-ida');
+    const fechaVuelta = document.getElementById('fecha-vuelta');
+
+    fechaIdaText.addEventListener('click', () => {
+      if (fechaIda.showPicker) fechaIda.showPicker();
+      else fechaIda.focus();
+    });
+
+    fechaVueltaText.addEventListener('click', () => {
+      if (fechaVuelta.showPicker) fechaVuelta.showPicker();
+      else fechaVuelta.focus();
+    });
+
+    fechaIda.addEventListener('change', () => {
+      fechaIdaText.value = formatearFecha(fechaIda.value);
+    });
+
+    fechaVuelta.addEventListener('change', () => {
+      fechaVueltaText.value = formatearFecha(fechaVuelta.value);
+    });
+
+    function formatearFecha(fecha) {
+      const f = new Date(fecha);
+      return f.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      });
+    }
+
+    // =============================
+    // BUSCAR (SKYSCANNER)
+    // =============================
     document.getElementById('btn-buscar').addEventListener('click', () => {
       const origen = document.getElementById('origen').value.toUpperCase();
       const destino = document.getElementById('destino').value.toUpperCase();
-      let fechaIda = document.getElementById('fecha-ida').value;   // "2026-03-29"
-      let fechaVuelta = document.getElementById('fecha-vuelta').value;
+      let fechaIdaVal = fechaIda.value;
+      let fechaVueltaVal = fechaVuelta.value;
 
-      if (!origen || !destino || !fechaIda || (!soloIda && !fechaVuelta)) {
-        alert('Rellena todos los campos.');
+      if (!origen || !destino || !fechaIdaVal || (!soloIda && !fechaVueltaVal)) {
+        alert('Rellena todos los campos');
         return;
       }
 
-      // Formatear fechas a YYYYMMDD
-      fechaIda = fechaIda.replace(/-/g, '');       // "20260329"
-      if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, ''); // "20260405" por ejemplo
+      fechaIdaVal = fechaIdaVal.replace(/-/g, '');
+      if (fechaVueltaVal) fechaVueltaVal = fechaVueltaVal.replace(/-/g, '');
 
-      // URL Skyscanner (España)
-      let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/`;
-      if (!soloIda && fechaVuelta) url += `${fechaVuelta}/`;
+      let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIdaVal}/`;
+      if (!soloIda && fechaVueltaVal) url += `${fechaVueltaVal}/`;
 
       window.open(url, '_blank');
     });
 
     // =============================
-    // FUNCIONALIDAD OFERTAS Y FAVORITOS
+    // OFERTAS
     // =============================
     function generarCard(d) {
       return `
         <div class="card">
-          <h3 style="color:#0070f3;">${d.nombre}</h3>
+          <h3>${d.nombre}</h3>
           <p><strong>${d.dias} días</strong></p>
           <p>📅 ${d.fechas}</p>
-          <p>✈️ ${d.vuelo}€ ida y vuelta</p>
-          <p>⏱️ ${d.vuelo_tiempo}</p>
-          <p>🏨 <strong>${d.hotel}</strong> ${d.hotel_precio}€</p>
+          <p>✈️ ${d.vuelo}€</p>
+          <p>🏨 ${d.hotel}</p>
 
-          <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
-            <img class="favorito" 
-                 src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png" 
-                 alt="Favorito" 
-                 title="Añadir a favoritos"
-                 style="width:25px; cursor:pointer;" data-fav="false">
-          </div>
+          <img class="favorito" src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png">
 
-          <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">Ver detalles</button>
-        </div>`;
+          <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">
+            Ver detalles
+          </button>
+        </div>
+      `;
     }
 
     function mostrarOfertas(lista) {
-      const container = document.getElementById('cards-hero');
-      if (lista.length === 0) {
-        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-        return;
-      }
-      container.innerHTML = lista.map(d => generarCard(d)).join('');
-      activarFavoritos();
+      document.getElementById('cards-hero').innerHTML =
+        lista.map(d => generarCard(d)).join('');
     }
 
-    function activarFavoritos() {
-      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-      document.querySelectorAll('.favorito').forEach(star => {
-        const card = star.closest('.card');
-        const slug = card.querySelector('button').getAttribute('onclick').match(/slug=([^']+)/)[1];
-        if (favoritos.includes(slug)) {
-          star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-          star.dataset.fav = "true";
-        }
-
-        star.onclick = () => {
-          let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-          if (star.dataset.fav === "true") {
-            star.src = "https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png";
-            star.dataset.fav = "false";
-            favoritos = favoritos.filter(f => f !== slug);
-          } else {
-            star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-            star.dataset.fav = "true";
-            if (!favoritos.includes(slug)) favoritos.push(slug);
-          }
-          localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        }
-      });
-    }
-
-    // Botón mostrar favoritos
-    let mostrandoFavoritos = false;
-    document.getElementById('btn-fav-toggle').addEventListener('click', () => {
-      const btn = document.getElementById('btn-fav-toggle');
-      mostrandoFavoritos = !mostrandoFavoritos;
-      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-      if (mostrandoFavoritos) {
-        mostrarOfertas(destinos.filter(d => favoritos.includes(d.slug)));
-        btn.textContent = "Mostrar todos";
-      } else {
-        mostrarOfertas(destinos);
-        btn.textContent = "Mostrar favoritos";
-      }
-    });
-
-    // Mini-buscador interactivo
+    // =============================
+    // MINI BUSCADOR
+    // =============================
     function buscarMini() {
       const destinoVal = document.getElementById('mini-destino').value.toLowerCase();
       const diasVal = parseInt(document.getElementById('mini-dias').value);
-      const resultados = destinos.filter(d => d.nombre.toLowerCase().includes(destinoVal) && (!diasVal || d.dias == diasVal));
-      const container = document.getElementById('resultados-mini');
-      if (resultados.length === 0) {
-        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-        return;
-      }
-      container.innerHTML = resultados.map(d => generarCard(d)).join('');
-      activarFavoritos();
+
+      const resultados = destinos.filter(d =>
+        d.nombre.toLowerCase().includes(destinoVal) &&
+        (!diasVal || d.dias == diasVal)
+      );
+
+      document.getElementById('resultados-mini').innerHTML =
+        resultados.map(d => generarCard(d)).join('');
     }
-    const fechaIdaInput = document.getElementById('fecha-ida');
-    const fechaVueltaInput = document.getElementById('fecha-vuelta');
-
-    // Cambiar a date al hacer focus (abre calendario en móvil)
-    fechaIdaInput.addEventListener('focus', () => {
-      fechaIdaInput.type = 'date';
-    });
-
-    fechaVueltaInput.addEventListener('focus', () => {
-      fechaVueltaInput.type = 'date';
-    });
-
-    // Volver a text si está vacío (para que se vea bonito)
-    fechaIdaInput.addEventListener('blur', () => {
-      if (!fechaIdaInput.value) fechaIdaInput.type = 'text';
-    });
-
-    fechaVueltaInput.addEventListener('blur', () => {
-      if (!fechaVueltaInput.value) fechaVueltaInput.type = 'text';
-    });
-
-    fechaIdaInput.addEventListener('change', () => {
-      fechaIdaInput.type = 'date';
-    });
-
-    fechaVueltaInput.addEventListener('change', () => {
-      fechaVueltaInput.type = 'date';
-    });
 
   </script>
 
 </body>
-
 </html>
