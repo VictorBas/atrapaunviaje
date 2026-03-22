@@ -508,5 +508,48 @@ footer {
   z-index: 2;
 }
 
+/* DESTINO: DETALLE DE VIAJE PRO */
+.detalle-viaje-pro {
+  display: flex;
+  gap: 40px;
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  margin: 0 auto; /* centrado horizontal */
+  box-sizing: border-box;
+}
+
+/* Columnas dentro del detalle */
+.viaje-col {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 250px; /* evita que sea demasiado pequeño */
+}
+
+/* RESPONSIVE DESTINO */
+@media (max-width: 900px) {
+  .detalle-viaje-pro {
+    flex-direction: column;
+    gap: 20px;
+    width: 95%; /* ocupa un poco menos que el 100% */
+    padding: 20px;
+  }
+
+  .viaje-col {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .detalle-viaje-pro {
+    width: 100%; /* ocupa todo el ancho */
+    padding: 15px;
+  }
+}
 
 
