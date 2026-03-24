@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <header class="header">
@@ -25,16 +26,14 @@
   <!-- HERO DESTINO -->
   <section id="hero-destino" class="hero-destino">
     <div id="detalle-viaje" class="detalle-viaje-pro">
-      <!-- Se llena con JS -->
+      <!-- JS -->
     </div>
   </section>
 
   <!-- ITINERARIO -->
   <section class="itinerario">
     <h2>Itinerario recomendado</h2>
-    <div class="dias" id="dias-itinerario">
-      <!-- Se llena con JS -->
-    </div>
+    <div class="dias" id="dias-itinerario"></div>
   </section>
 
 </main>
@@ -44,27 +43,32 @@
 </footer>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const slug = params.get('slug');
+let destinoActual;
 
+// =============================
+// CARGAR DESTINO
+// =============================
 fetch('destinos.json')
   .then(res => res.json())
   .then(data => {
-    const destino = data.find(d => d.slug === slug);
-    if (!destino) return;
 
-    // HERO
+    const slug = new URLSearchParams(window.location.search).get('slug');
+    destinoActual = data.find(d => d.slug === slug);
+
+    if (!destinoActual) return;
+
+    // HERO IMAGEN
     const hero = document.getElementById('hero-destino');
-    hero.style.backgroundImage = `url(${destino.imagen})`;
+    hero.style.backgroundImage = `url(${destinoActual.imagen})`;
 
-    // DETALLE
+    // DETALLE VIAJE
     const detalle = document.getElementById('detalle-viaje');
     detalle.innerHTML = `
       <div class="viaje-col">
-        <h2>✈️ ${destino.nombre} - ${destino.dias} días</h2>
-        <p>📅 Fechas: ${destino.fechas}</p>
-        <p>🛫 Vuelo ida y vuelta: ${destino.vuelo}€</p>
-        <p>⏱️Duración aproximada:  ${destino.vuelo_tiempo}</p>
+        <h2>✈️ ${destinoActual.nombre} - ${destinoActual.dias} días</h2>
+        <p>📅 Fechas: ${destinoActual.fechas}</p>
+        <p>🛫 Vuelo ida y vuelta: ${destinoActual.vuelo}€</p>
+        <p>⏱️ Duración aproximada: ${destinoActual.vuelo_tiempo}</p>
 
         <button class="btn" id="btn-vuelos">
           Reservar vuelo
@@ -73,8 +77,8 @@ fetch('destinos.json')
 
       <div class="viaje-col">
         <h2>🏨 Hotel recomendado</h2>
-        <p>📍 ${destino.hotel}</p>
-        <p>💰 Precio total:  ${destino.hotel_precio}€</p>
+        <p>📍 ${destinoActual.hotel}</p>
+        <p>💰 Precio por noche: ${destinoActual.hotel_precio}€</p>
         <p>💡 Tip: Reserva pronto para mejores precios</p>
 
         <button class="btn-azul" id="btn-hotel">
@@ -85,7 +89,7 @@ fetch('destinos.json')
 
     // ITINERARIO
     const diasIt = document.getElementById('dias-itinerario');
-    diasIt.innerHTML = destino.itinerario.map(d => `
+    diasIt.innerHTML = destinoActual.itinerario.map(d => `
       <div class="itinerario-card">
         <h3>${d.dia}</h3>
         <p><strong>🌅 Mañana:</strong> ${d.manana}</p>
@@ -99,31 +103,43 @@ fetch('destinos.json')
     // =============================
     document.getElementById('btn-vuelos').addEventListener('click', () => {
 
-      // ⚠️ ASEGÚRATE DE TENER ESTO EN JSON
-      if (!destino.fecha_ida || !destino.fecha_vuelta || !destino.iata_origen || !destino.iata_destino) {
-        alert('Faltan datos de vuelo en el JSON');
-        return;
-      }
+      const origen = destinoActual.iata_origen;
+      const destino = destinoActual.iata_destino;
 
-      let ida = destino.fecha_ida.replace(/-/g, '');
-      let vuelta = destino.fecha_vuelta.replace(/-/g, '');
+      let fechaIda = destinoActual.fecha_ida.replace(/-/g, '');
+      let fechaVuelta = destinoActual.fecha_vuelta.replace(/-/g, '');
 
-      const url = `https://www.skyscanner.es/transport/flights/${destino.iata_origen}/${destino.iata_destino}/${ida}/${vuelta}/`;
+      const url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/${fechaVuelta}/`;
 
       window.open(url, '_blank');
     });
 
     // =============================
-    // BOTÓN HOTEL
+    // BOTÓN HOTEL (PRO)
     // =============================
     document.getElementById('btn-hotel').addEventListener('click', () => {
 
-      if (!destino.fecha_ida || !destino.fecha_vuelta) {
-        window.open(destino.hotel_link, '_blank');
-        return;
-      }
+      const checkin = destinoActual.fecha_ida;
+      const checkout = destinoActual.fecha_vuelta;
 
-      const url = `https://www.booking.com/searchresults.es.html?ss=${destino.nombre}&checkin=${destino.fecha_ida}&checkout=${destino.fecha_vuelta}&group_adults=2&no_rooms=1`;
+      let url;
+
+      if (destinoActual.hotel_link) {
+
+        url = destinoActual.hotel_link;
+
+        if (url.includes('?')) {
+          url += `&checkin=${checkin}&checkout=${checkout}&group_adults=2&no_rooms=1`;
+        } else {
+          url += `?checkin=${checkin}&checkout=${checkout}&group_adults=2&no_rooms=1`;
+        }
+
+      } else {
+
+        const busqueda = encodeURIComponent(destinoActual.hotel + " " + destinoActual.nombre);
+
+        url = `https://www.booking.com/searchresults.es.html?ss=${busqueda}&checkin=${checkin}&checkout=${checkout}&group_adults=2&no_rooms=1`;
+      }
 
       window.open(url, '_blank');
     });

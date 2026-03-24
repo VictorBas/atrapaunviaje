@@ -10,9 +10,9 @@
     "iata_destino": "ROM",
     "vuelo": 40,
     "vuelo_tiempo": "2h 10min",
-    "hotel": "Hotel Roma Central",
+    "hotel": "In Rome",
     "hotel_precio": 120,
-    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
+    "hotel_link": "https://www.booking.com/hotel/it/in-rome.es.html?aid=TU_ID",
     "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/09/19/coliseo_9b206d89_240919151753_1280x853.jpg",
     "itinerario": [
   {
