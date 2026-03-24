@@ -161,6 +161,49 @@
         "noche": "Última cena y regreso al hotel."
       }
     ]
+  },
+
+  {
+    "slug": "amsterdam",
+    "nombre": "Amsterdam",
+    "dias": 4,
+    "fechas": "20 septiembre - 24 septiembre",
+    "fecha_ida": "2026-09-20",
+    "fecha_vuelta": "2026-09-24",
+    "iata_origen": "MAD",
+    "iata_destino": "AMS",
+    "vuelo": 50,
+    "vuelo_tiempo": "2h 45min",
+    "hotel": "Amsterdam Downtown Hotel",
+    "hotel_precio": 110,
+    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
+    "imagen": "https://www.amsterdam.net/es/wp-content/uploads/sites/93/amsterdam-canales-puentes-hd.jpg",
+    "itinerario": [
+      {
+        "dia": "Día 1",
+        "manana": "Barrio de Alfama y Castillo de San Jorge.",
+        "tarde": "Paseo por Praça do Comércio y Baixa.",
+        "noche": "Cena con fado en Bairro Alto."
+      },
+      {
+        "dia": "Día 2",
+        "manana": "Torre de Belém y Monasterio de los Jerónimos.",
+        "tarde": "Paseo por la ribera del río Tajo.",
+        "noche": "Disfrutar de la vida nocturna en Cais do Sodré."
+      },
+      {
+        "dia": "Día 3",
+        "manana": "Excursión a Sintra y Palacio da Pena.",
+        "tarde": "Visita a Quinta da Regaleira.",
+        "noche": "Regreso a Lisboa y cena típica portuguesa."
+      },
+      {
+        "dia": "Día 4",
+        "manana": "Tranvía 28 y paseo por Graça y Mouraria.",
+        "tarde": "Compras en Chiado.",
+        "noche": "Última cena y regreso al hotel."
+      }
+    ]
   }
 
 ]

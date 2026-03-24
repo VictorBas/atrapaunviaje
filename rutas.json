@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "viena-bratislava-budapest",
+    "nombre": "Viena → Bratislava → Budapest",
+    "dias": 6,
+    "fechas": "10 mayo - 16 mayo",
+    "precio": 220
+  },
+  {
+    "slug": "praga-viena-budapest",
+    "nombre": "Praga → Viena → Budapest",
+    "dias": 7,
+    "fechas": "5 junio - 12 junio",
+    "precio": 250
+  }
+]

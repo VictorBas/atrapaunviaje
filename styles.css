@@ -180,16 +180,21 @@ button:hover,
 
 .cards-hero {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
 .cards-hero .card {
-  background: rgba(255,255,255,0.95);
   color: black;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  width: 320px;
+}
+.cards-hero .card:hover {
+  transform: translateY(-2px) scale(1.02);
 }
 img, div {
   max-width: 100%;
@@ -825,6 +830,59 @@ input[type="date"] {
 #btn-buscar{
   margin-top: 15px;
 }
+@media (max-width: 1200px) {
+  .cards-hero {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
+@media (max-width: 900px) {
+  .cards-hero {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
+@media (max-width: 600px) {
+  .cards-hero {
+    grid-template-columns: 1fr;
+  }
+}
+.toggle-vistas {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toggle-vistas button {
+  flex: 1;
+}
+
+.toggle-vistas .active {
+  background: #0070f3;
+}
+
+.toggle-vistas button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #0070f3; 
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* 🔵 ACTIVO (Destinos o Rutas seleccionado) */
+.toggle-vistas button.active {
+  background: #ff7f50;
+}
+
+/* ✨ HOVER SOLO PARA LOS QUE NO ESTÁN ACTIVOS */
+.toggle-vistas button:not(.active):hover {
+  background: linear-gradient(45deg, #0070f3, #00c6ff, #1abc9c, #f1c40f);
+  transform: scale(1.05);
+}
+
+.toggle-vistas button.active:hover {
+  filter: brightness(1.1);
+}
 

@@ -34,15 +34,13 @@
 
             <div class="campo-fecha">
               <p>Fecha ida</p>
-              <input type="date" id="fecha-ida" placeholder="Selecciona fecha">
+              <input type="date" id="fecha-ida">
             </div>
 
             <div class="campo-fecha">
               <p id="fecha-vuelta-p">Fecha vuelta</p>
-              <input type="date" id="fecha-vuelta" placeholder="Selecciona fecha">
+              <input type="date" id="fecha-vuelta">
             </div>
-
-
 
             <button class="btn" id="btn-buscar">Buscar vuelos</button>
           </div>
@@ -50,25 +48,17 @@
 
         <!-- OFERTAS -->
         <div class="ofertas-hero">
+
           <div style="display:flex; justify-content: space-between; margin-bottom:15px;">
             <h2>Ofertas seleccionadas ✨</h2>
-            <button id="btn-fav-toggle" class="btn" style="width:auto;">Mostrar favoritos</button>
+
+            <div class="toggle-vistas">
+              <button id="btn-destinos" class="active">Destinos</button>
+              <button id="btn-rutas">Rutas</button>
+            </div>
           </div>
 
           <div class="cards-hero" id="cards-hero"></div>
-        </div>
-
-        <!-- MINI BUSCADOR -->
-        <div class="mini-buscador">
-          <h3>Filtra tus destinos favoritos 🔎</h3>
-
-          <div class="search-bar-interactivo">
-            <input type="text" id="mini-destino" placeholder="Destino (ej: París)">
-            <input type="number" id="mini-dias" placeholder="Duración (días)">
-            <button class="btn" onclick="buscarMini()">Buscar</button>
-          </div>
-
-          <div id="resultados-mini" class="cards-hero"></div>
         </div>
 
       </div>
@@ -81,15 +71,19 @@
 
   <script>
     let destinos = [];
+    let rutas = [];
     let soloIda = false;
 
     // =============================
-    // CARGAR DATOS
+    // CARGAR JSON
     // =============================
-    fetch('destinos.json')
-      .then(res => res.json())
-      .then(data => {
-        destinos = data;
+    Promise.all([
+      fetch('destinos.json').then(res => res.json()),
+      fetch('rutas.json').then(res => res.json())
+    ])
+      .then(([dataDestinos, dataRutas]) => {
+        destinos = dataDestinos;
+        rutas = dataRutas;
         mostrarOfertas(destinos);
       });
 
@@ -106,33 +100,6 @@
         soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
     });
 
-
-    // =============================
-    // FECHAS (FUNCIONA EN iOS + PC)
-    // =============================
-    const fechaIda = document.getElementById('fecha-ida');
-    const fechaVuelta = document.getElementById('fecha-vuelta');
-
-    const fechaIdaText = document.getElementById('fecha-ida-text');
-    const fechaVueltaText = document.getElementById('fecha-vuelta-text');
-
-    fechaIda.addEventListener('change', () => {
-      fechaIdaText.value = formatear(fechaIda.value);
-    });
-
-    fechaVuelta.addEventListener('change', () => {
-      fechaVueltaText.value = formatear(fechaVuelta.value);
-    });
-
-    function formatear(fecha) {
-      const f = new Date(fecha);
-      return f.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      });
-    }
-
     // =============================
     // BUSCAR SKYSCANNER
     // =============================
@@ -147,7 +114,6 @@
         return;
       }
 
-      // Formato YYYYMMDD
       fechaIda = fechaIda.replace(/-/g, '');
       if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, '');
 
@@ -157,11 +123,28 @@
       window.open(url, '_blank');
     });
 
-
     // =============================
     // CARDS
     // =============================
     function generarCard(d) {
+
+      // 🔵 RUTAS
+      if (d.precio) {
+        return `
+          <div class="card">
+            <h3>${d.nombre}</h3>
+            <p><strong>${d.dias} días</strong></p>
+            <p>📅 ${d.fechas}</p>
+            <p>💰 ${d.precio}€</p>
+
+            <button class="btn">
+              Ver ruta
+            </button>
+          </div>
+        `;
+      }
+
+      // 🟢 DESTINOS
       return `
         <div class="card">
           <h3>${d.nombre}</h3>
@@ -169,11 +152,6 @@
           <p>📅 ${d.fechas}</p>
           <p>✈️ ${d.vuelo}€</p>
           <p>🏨 ${d.hotel} ${d.hotel_precio}€</p>
-
-          <img class="favorito" 
-               src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png"
-               data-fav="false"
-               style="width:25px; cursor:pointer;">
 
           <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">
             Ver detalles
@@ -191,83 +169,28 @@
       }
 
       container.innerHTML = lista.map(d => generarCard(d)).join('');
-      activarFavoritos();
     }
 
     // =============================
-    // FAVORITOS (ARREGLADO)
+    // BOTONES DESTINOS / RUTAS
     // =============================
-    function activarFavoritos() {
-      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-      document.querySelectorAll('.favorito').forEach(star => {
-        const card = star.closest('.card');
-        const slug = card.querySelector('button').getAttribute('onclick').match(/slug=([^']+)/)[1];
-
-        if (favoritos.includes(slug)) {
-          star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-          star.dataset.fav = "true";
-        }
-
-        star.onclick = () => {
-          let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-          if (star.dataset.fav === "true") {
-            star.src = "https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png";
-            star.dataset.fav = "false";
-            favoritos = favoritos.filter(f => f !== slug);
-          } else {
-            star.src = "https://images.icon-icons.com/1527/PNG/512/star_106651.png";
-            star.dataset.fav = "true";
-            if (!favoritos.includes(slug)) favoritos.push(slug);
-          }
-
-          localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        }
-      });
-    }
-
-    // =============================
-    // BOTÓN FAVORITOS
-    // =============================
-    let mostrandoFavoritos = false;
-
-    document.getElementById('btn-fav-toggle').addEventListener('click', () => {
-      mostrandoFavoritos = !mostrandoFavoritos;
-
-      const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-      if (mostrandoFavoritos) {
-        mostrarOfertas(destinos.filter(d => favoritos.includes(d.slug)));
-        document.getElementById('btn-fav-toggle').textContent = "Mostrar todos";
-      } else {
-        mostrarOfertas(destinos);
-        btn - fav - toggle.textContent == "Mostrar favoritos";
-      }
+    document.getElementById('btn-destinos').addEventListener('click', () => {
+      mostrarOfertas(destinos);
+      setActive('btn-destinos');
     });
 
-    // =============================
-    // MINI BUSCADOR
-    // =============================
-    function buscarMini() {
-      const destinoVal = document.getElementById('mini-destino').value.toLowerCase();
-      const diasVal = parseInt(document.getElementById('mini-dias').value);
+    document.getElementById('btn-rutas').addEventListener('click', () => {
+      mostrarOfertas(rutas);
+      setActive('btn-rutas');
+    });
 
-      const resultados = destinos.filter(d =>
-        d.nombre.toLowerCase().includes(destinoVal) &&
-        (!diasVal || d.dias == diasVal)
-      );
-
-      const container = document.getElementById('resultados-mini');
-
-      if (resultados.length === 0) {
-        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-        return;
-      }
-
-      container.innerHTML = resultados.map(d => generarCard(d)).join('');
-      activarFavoritos();
+    function setActive(id) {
+      document.querySelectorAll('.toggle-vistas button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
     }
+
   </script>
 
 </body>
