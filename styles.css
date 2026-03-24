@@ -891,3 +891,150 @@ input[type="date"] {
   filter: brightness(1.1);
 }
 
+/* Contenedor principal de la info en destino.html */
+.detalle-viaje-pro {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.viaje-info-wrapper {
+    background: rgba(0, 0, 0, 0.7); /* Fondo negro con 70% de opacidad */
+    backdrop-filter: blur(10px);    /* Efecto desenfoque de fondo */
+    color: white;
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.viaje-info-wrapper h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.titulo-hotel {
+    margin-top: 30px !important;
+}
+
+.info-item {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Botón Naranja (Vuelo) */
+.btn-naranja {
+    background-color: #f3843e;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 10px 0 20px 0;
+}
+
+/* Botón Azul (Hotel) */
+.btn-azul-pro {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-naranja:hover, .btn-azul-pro:hover {
+    filter: brightness(1.1);
+}
+
+/* Contenedor principal en destino.html */
+#hero-destino {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrar verticalmente en escritorio */
+    min-height: 60vh; /* Altura de la sección */
+    padding: 40px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* La tarjeta translúcida principal */
+.glass-card-viaje {
+   /* Efecto desenfoque de fondo */
+    color: white;
+    border-radius: 20px;
+    max-width: 1000px; /* Ancho máximo para escritorio */
+    width: 100%;
+    display: flex; /* Activar diseño flex */
+    gap: 40px; /* Espacio entre columnas */
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* Cada columna (vuelo y hotel) */
+.columna-viaje {
+    flex: 1; /* Ocupar 50% cada una */
+    display: flex;
+    flex-direction: column;
+}
+
+.columna-viaje h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.columna-viaje .info-item {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+/* Botón Naranja (Vuelo) - Adaptado de tu captura */
+.btn-naranja-full {
+    background-color: #f3843e;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: auto; /* Empujar hacia abajo si hay poco contenido */
+    text-transform: capitalize;
+}
+
+/* Botón Azul (Hotel) - Adaptado de tu captura */
+.btn-azul-full {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: auto; /* Empujar hacia abajo if poco contenido */
+    text-transform: capitalize;
+}
+
+.btn-naranja-full:hover, .btn-azul-full:hover {
+    filter: brightness(1.1);
+}
+
+/* Asegurar que el itinerario se vea bien debajo */
+.itinerario {
+    text-align: center;
+    margin-top: 50px;
+    padding: 0 40px;
+}
+

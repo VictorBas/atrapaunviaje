@@ -15,32 +15,31 @@
     "hotel_link": "https://www.booking.com/hotel/it/in-rome.es.html?aid=TU_ID",
     "imagen": "https://content-viajes.nationalgeographic.com.es/medio/2024/09/19/coliseo_9b206d89_240919151753_1280x853.jpg",
     "itinerario": [
-  {
-    "dia": "Día 1",
-    "manana": "Paseamos por la Fontana di Trevi y el centro histórico, disfrutando de sus calles y ambiente.",
-    "tarde": "Visitamos el Coliseo romano y el Foro, una de las zonas más impresionantes de Roma.",
-    "noche": "Cena en el barrio de Trastevere, perfecto para disfrutar del ambiente local."
-  },
-  {
-    "dia": "Día 2",
-    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
-    "tarde": "Museos Vaticanos y Capilla Sixtina.",
-    "noche": "Paseo nocturno por el centro de Roma."
-  },
-  {
-    "dia": "Día 3",
-    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
-    "tarde": "Museos Vaticanos y Capilla Sixtina.",
-    "noche": "Paseo nocturno por el centro de Roma."
-  },
-  {
-    "dia": "Día 4",
-    "manana": "Visitamos el Vaticano y la Plaza de San Pedro.",
-    "tarde": "Museos Vaticanos y Capilla Sixtina.",
-    "noche": "Paseo nocturno por el centro de Roma."
-  }
-]
-
+      {
+        "dia": "Día 1",
+        "manana": "Visita guiada al Coliseo, Foro Romano y Palatino. Incluye entrada prioritaria y audioguía. Llegada temprano para evitar multitudes.",
+        "tarde": "Recorrido por el Panteón y Plaza de la Rotonda. Paseo por el barrio de Campo de’ Fiori y visita a la Iglesia de Santa Maria in Montesanto.",
+        "noche": "Cena en un restaurante tradicional cerca de Piazza Navona, como 'Tonnarello', famoso por sus pasta frescas y ambiente auténtico."
+      },
+      {
+        "dia": "Día 2",
+        "manana": "Excursión a la Villa Borghese y visita al Museo Borghese con entrada anticipada. No te pierdas las esculturas de Bernini y Caravaggio.",
+        "tarde": "Tiempo libre para explorar la Galería Borghese o pasear por el Parque. Opcional: visita a la Basílica de San Pedro en el Vaticano con entrada anticipada.",
+        "noche": "Dinner cruise por el río Tíber con vistas iluminadas de los monumentos romanos. Incluye menú italiano y cócteles."
+      },
+      {
+        "dia": "Día 3",
+        "manana": "Visita al Vaticano: Capilla Sixtina, Museos Vaticanos y Basílica de San Pedro. Reserva con antelación para evitar colas.",
+        "tarde": "Paseo por el barrio de Prati y visita a la Basílica de San Juan de Letrán. Tiempo libre para compras en Via del Corso o Via dei Condotti.",
+        "noche": "Cena en un restaurante con vistas a la Ciudad del Vaticano, como 'Il Pagliaccio', conocido por su cocina romana y ambiente elegante."
+      },
+      {
+        "dia": "Día 4",
+        "manana": "Excursión a Ostia Antica, el puerto romano antiguo, para explorar ruinas bien conservadas y museos arqueológicos. Transporte incluido.",
+        "tarde": "Regreso a Roma y visita al Mercado de Trajano y su biblioteca. Último paseo por el Gianicolo para vistas panorámicas de la ciudad.",
+        "noche": "Cena de despedida en un restaurante con estrella Michelin, como 'Enoteca Pinchiorri', para una experiencia gastronómica excepcional."
+      }
+    ]
   },
   {
     "slug": "paris",
@@ -60,27 +59,27 @@
     "itinerario": [
       {
         "dia": "Día 1",
-        "manana": "Paseamos por la Torre Eiffel y alrededores.",
-        "tarde": "Visitamos el Museo del Louvre.",
-        "noche": "Cena en Montmartre y paseo nocturno."
+        "manana": "Recorrido por la Torre Eiffel y sus alrededores, incluyendo el Champ de Mars. Visita al Museo del Louvre para admirar obras maestras como la Mona Lisa.",
+        "tarde": "Paseo por el Barrio Latino con parada en la Sorbona y visita a la librería Shakespeare and Company. Almuerzo en un café tradicional como Les Deux Magots.",
+        "noche": "Cena en un restaurante con estrella Michelin como Le Jules Verne (dentro de la Torre Eiffel) o Bouillon Pigalle para una experiencia más auténtica y económica."
       },
       {
         "dia": "Día 2",
-        "manana": "Campos Elíseos y Arco del Triunfo.",
-        "tarde": "Notre Dame y Sainte-Chapelle.",
-        "noche": "Crucero por el Sena."
+        "manana": "Excursión a Versalles para visitar el Palacio de Versalles, los Jardines y el Gran Tívoli. Tour guiado por las salas reales y el Salón de los Espejos.",
+        "tarde": "Paseo por el río Sena en barco turístico.",
+        "noche": "Cena en un restaurante con vistas a Notre-Dame, como Le Comptoir du Relais, conocido por su ambiente acogedor y cocina francesa tradicional."
       },
       {
         "dia": "Día 3",
-        "manana": "Palacio de Versalles.",
-        "tarde": "Barrio Latino y Panthéon.",
-        "noche": "Cena típica francesa cerca del Sena."
+        "manana": "Visita a Montmartre, incluyendo la Basílica del Sacré-Cœur y el Museo de Montmartre. Paseo por las calles empedradas y visita al Moulin Rouge.",
+        "tarde": "Almuerzo en un bistró típico como Le Consulat. Visita al Museo de Arte Moderno (Centre Pompidou) para admirar obras contemporáneas.",
+        "noche": "Espectáculo de cabaret en el Moulin Rouge o en el Lido. Cena en un restaurante con cocina internacional en el barrio de La Défense."
       },
       {
         "dia": "Día 4",
-        "manana": "Mercados locales y compras.",
-        "tarde": "Relajarnos en Jardines de Luxemburgo.",
-        "noche": "Regreso al hotel y salida."
+        "manana": "Último paseo por los Campos Elíseos y visita a la Arco del Triunfo. Compras en las Galerías Lafayette o Printemps Haussmann. Despedida con un café en una pastelería tradicional como Ladurée.",
+        "tarde": "Visita al Palacio de Chaillot y vistas panorámicas de París desde el Jardín de las Tullerías. Tiempo libre para compras de último minuto o relajación en un parque.",
+        "noche": "Cena de despedida en un restaurante con terraza como Le Train Bleu en la Ópera Garnier, o en un lugar más íntimo como Le Petit Cler."
       }
     ]
   },
@@ -102,21 +101,21 @@
     "itinerario": [
       {
         "dia": "Día 1",
-        "manana": "Tower Bridge y Torre de Londres.",
-        "tarde": "Paseo por South Bank y London Eye.",
-        "noche": "Cena en Covent Garden."
+        "manana": "Visita al Palacio de Buckingham y cambio de guardia (si coincide). Paseo por St. James’s Park y exploración de la zona de Westminster.",
+        "tarde": "Recorrido por el Big Ben, el Parlamento y la Abadía de Westminster. Detención en el Mercado de Covent Garden para probar comida callejera.",
+        "noche": "Cena en un pub tradicional como The Churchill Arms (Kensington) con ambiente histórico y platos británicos auténticos."
       },
       {
         "dia": "Día 2",
-        "manana": "Museo Británico.",
-        "tarde": "Palacio de Buckingham y cambio de guardia.",
-        "noche": "Paseo por Piccadilly Circus y Soho."
+        "manana": "Tour por el Museo Británico para admirar obras como la Piedra de Rosetta y las esculturas del Partenón. Paseo por Bloomsbury y café en The British Library Café.",
+        "tarde": "Excursión a Camden Town para explorar su mercado callejero, música en vivo y ambiente alternativo. Regreso a Camden Lock y paseo en barco por el río Támesis.",
+        "noche": "Cena en Dishoom (Covent Garden), un restaurante indio británico con decoración vintage y platos deliciosos como el *black daal* y el *bhel puri*."
       },
       {
         "dia": "Día 3",
-        "manana": "Camden Market y paseo por Regent's Canal.",
-        "tarde": "Hyde Park y Harrods.",
-        "noche": "Cena cerca de Tower Bridge y regreso."
+        "manana": "Visita a la Torre de Londres para ver las Joyas de la Corona y los trajes de la Guardia Real. Paseo por Tower Bridge y el barrio de Southwark.",
+        "tarde": "Recorrido por el Mercado de Portobello Road (Notting Hill) para antigüedades y ambiente local. Almuerzo en un café de la zona como The Churchill Arms.",
+        "noche": "Espectáculo de teatro musical en el West End, como *Les Misérables* o *The Lion King*, seguido de una copa en un bar temático como The Savoy’s Bar."
       }
     ]
   },
@@ -137,73 +136,29 @@
     "imagen": "https://cdn2.civitatis.com/portugal/lisboa/guia/lisbon-tram-seo.jpg",
     "itinerario": [
       {
-        "dia": "Día 1",
-        "manana": "Barrio de Alfama y Castillo de San Jorge.",
-        "tarde": "Paseo por Praça do Comércio y Baixa.",
-        "noche": "Cena con fado en Bairro Alto."
+        "dia": "Día 1: Llegada y primer contacto con la ciudad",
+        "manana": "Llegada a Lisboa. Traslado al alojamiento y check-in. Paseo por el Barrio Alto para explorar sus calles empedradas y vistas al río.",
+        "tarde": "Visita guiada al Castillo de São Jorge. Almuerzo en un restaurante típico cerca del castillo, como 'Taberna da Esperança'.",
+        "noche": "Cena en el barrio de Alfama con vistas al río Tajo. Recomendado: 'Cervejaria Ramiro' para probar bacalhau (bacalao) y pastéis de nata."
       },
       {
-        "dia": "Día 2",
-        "manana": "Torre de Belém y Monasterio de los Jerónimos.",
-        "tarde": "Paseo por la ribera del río Tajo.",
-        "noche": "Disfrutar de la vida nocturna en Cais do Sodré."
+        "dia": "Día 2: Arte, historia y miradores",
+        "manana": "Visita al Museo Nacional do Azulejo para conocer la tradición cerámica portuguesa. Desayuno en 'Manteigaria da Rua das Flores'.",
+        "tarde": "Recorrido por el Elevador de Santa Justa y paseo por la Baixa. Visita al Convento do Carmo y su museo. Almuerzo en 'A Baiuca'.",
+        "noche": "Atardecer en el Miradouro da Senhora do Monte. Cena en 'Canto da Cidade' con platos tradicionales como 'feijoada' o 'arroz de marisco'."
       },
       {
-        "dia": "Día 3",
-        "manana": "Excursión a Sintra y Palacio da Pena.",
-        "tarde": "Visita a Quinta da Regaleira.",
-        "noche": "Regreso a Lisboa y cena típica portuguesa."
+        "dia": "Día 3: Excursión a Sintra y naturaleza",
+        "manana": "Excursión a Sintra en tren. Visita al Palacio da Pena, un castillo de cuento con vistas espectaculares. Desayuno en Sintra en 'Tascantiga'.",
+        "tarde": "Recorrido por el Palacio Nacional de Sintra y el Jardín de la Quinta da Regaleira. Almuerzo en 'A Tasquinha do Avillez'. Regreso a Lisboa en tren.",
+        "noche": "Cena ligera en el barrio de Graça. Visita nocturna al Miradouro da Graça para disfrutar de las luces de la ciudad. Opcional: espectáculo de fado en 'Clube de Fado'."
       },
       {
-        "dia": "Día 4",
-        "manana": "Tranvía 28 y paseo por Graça y Mouraria.",
-        "tarde": "Compras en Chiado.",
-        "noche": "Última cena y regreso al hotel."
-      }
-    ]
-  },
-
-  {
-    "slug": "amsterdam",
-    "nombre": "Amsterdam",
-    "dias": 4,
-    "fechas": "20 septiembre - 24 septiembre",
-    "fecha_ida": "2026-09-20",
-    "fecha_vuelta": "2026-09-24",
-    "iata_origen": "MAD",
-    "iata_destino": "AMS",
-    "vuelo": 50,
-    "vuelo_tiempo": "2h 45min",
-    "hotel": "Amsterdam Downtown Hotel",
-    "hotel_precio": 110,
-    "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
-    "imagen": "https://www.amsterdam.net/es/wp-content/uploads/sites/93/amsterdam-canales-puentes-hd.jpg",
-    "itinerario": [
-      {
-        "dia": "Día 1",
-        "manana": "Barrio de Alfama y Castillo de San Jorge.",
-        "tarde": "Paseo por Praça do Comércio y Baixa.",
-        "noche": "Cena con fado en Bairro Alto."
-      },
-      {
-        "dia": "Día 2",
-        "manana": "Torre de Belém y Monasterio de los Jerónimos.",
-        "tarde": "Paseo por la ribera del río Tajo.",
-        "noche": "Disfrutar de la vida nocturna en Cais do Sodré."
-      },
-      {
-        "dia": "Día 3",
-        "manana": "Excursión a Sintra y Palacio da Pena.",
-        "tarde": "Visita a Quinta da Regaleira.",
-        "noche": "Regreso a Lisboa y cena típica portuguesa."
-      },
-      {
-        "dia": "Día 4",
-        "manana": "Tranvía 28 y paseo por Graça y Mouraria.",
-        "tarde": "Compras en Chiado.",
-        "noche": "Última cena y regreso al hotel."
+        "dia": "Día 4: Cultura marina y despedida",
+        "manana": "Visita al Museo de la Marina y paseo por el barrio de Belém. Desayuno en 'Fábrica Coffee Roasters'.",
+        "tarde": "Recorrido por el Monasterio de los Jerónimos y la Torre de Belém. Almuerzo en 'Belém Social Club'. Tiempo libre para comprar azulejos o pastéis de nata en 'Manteigaria de Belém'.",
+        "noche": "Última cena en 'DOC Lisboa' con vistas panorámicas de la ciudad. Traslado al aeropuerto o alojamiento según itinerario."
       }
     ]
   }
-
 ]

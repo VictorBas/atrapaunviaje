@@ -1,198 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <title>Atrapa un Viaje</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="index">
-
   <header class="header">
     <h1>Atrapa un Viaje ✈️</h1>
     <p>Vuelos baratos y escapadas inolvidables</p>
   </header>
-
   <main>
     <section class="hero">
       <div class="hero-grid-3cols">
-
-        <!-- BUSCADOR -->
         <div class="buscador">
           <h2>Busca tu vuelo ideal 🌍</h2>
-
-          <button id="btn-toggle-vuelo" class="btn" style="margin-bottom:10px;">
-            Modo: Ida y vuelta
-          </button>
-
+          <button id="btn-toggle-vuelo" class="btn" style="margin-bottom:10px;">Modo: Ida y vuelta</button>
           <div class="search-bar">
-
             <input type="text" id="origen" placeholder="Código IATA origen (ej: MAD)">
             <input type="text" id="destino" placeholder="Código IATA destino (ej: ROM)">
-
             <div class="campo-fecha">
               <p>Fecha ida</p>
               <input type="date" id="fecha-ida">
             </div>
-
             <div class="campo-fecha">
               <p id="fecha-vuelta-p">Fecha vuelta</p>
               <input type="date" id="fecha-vuelta">
             </div>
-
             <button class="btn" id="btn-buscar">Buscar vuelos</button>
           </div>
         </div>
-
-        <!-- OFERTAS -->
         <div class="ofertas-hero">
-
           <div style="display:flex; justify-content: space-between; margin-bottom:15px;">
             <h2>Ofertas seleccionadas ✨</h2>
-
             <div class="toggle-vistas">
               <button id="btn-destinos" class="active">Destinos</button>
               <button id="btn-rutas">Rutas</button>
             </div>
           </div>
-
           <div class="cards-hero" id="cards-hero"></div>
         </div>
-
       </div>
     </section>
   </main>
+  <footer><p>© 2026 Atrapa un Viaje</p></footer>
 
-  <footer>
-    <p>© 2026 Atrapa un Viaje</p>
-  </footer>
-
-  <script>
-    let destinos = [];
-    let rutas = [];
-    let soloIda = false;
-
-    // =============================
-    // CARGAR JSON
-    // =============================
-    Promise.all([
-      fetch('destinos.json').then(res => res.json()),
-      fetch('rutas.json').then(res => res.json())
-    ])
-      .then(([dataDestinos, dataRutas]) => {
-        destinos = dataDestinos;
-        rutas = dataRutas;
-        mostrarOfertas(destinos);
-      });
-
-    // =============================
-    // TOGGLE IDA / VUELTA
-    // =============================
-    document.getElementById('btn-toggle-vuelo').addEventListener('click', () => {
-      soloIda = !soloIda;
-
-      document.getElementById('fecha-vuelta').style.display = soloIda ? 'none' : 'block';
-      document.getElementById('fecha-vuelta-p').style.display = soloIda ? 'none' : 'block';
-
-      document.getElementById('btn-toggle-vuelo').textContent =
-        soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
-    });
-
-    // =============================
-    // BUSCAR SKYSCANNER
-    // =============================
-    document.getElementById('btn-buscar').addEventListener('click', () => {
-      const origen = document.getElementById('origen').value.toUpperCase();
-      const destino = document.getElementById('destino').value.toUpperCase();
-      let fechaIda = document.getElementById('fecha-ida').value;
-      let fechaVuelta = document.getElementById('fecha-vuelta').value;
-
-      if (!origen || !destino || !fechaIda || (!soloIda && !fechaVuelta)) {
-        alert('Rellena todos los campos');
-        return;
-      }
-
-      fechaIda = fechaIda.replace(/-/g, '');
-      if (fechaVuelta) fechaVuelta = fechaVuelta.replace(/-/g, '');
-
-      let url = `https://www.skyscanner.es/transport/flights/${origen}/${destino}/${fechaIda}/`;
-      if (!soloIda && fechaVuelta) url += `${fechaVuelta}/`;
-
-      window.open(url, '_blank');
-    });
-
-    // =============================
-    // CARDS
-    // =============================
-    function generarCard(d) {
-
-      // 🔵 RUTAS
-      if (d.precio) {
-        return `
-          <div class="card">
-            <h3>${d.nombre}</h3>
-            <p><strong>${d.dias} días</strong></p>
-            <p>📅 ${d.fechas}</p>
-            <p>💰 ${d.precio}€</p>
-
-            <button class="btn">
-              Ver ruta
-            </button>
-          </div>
-        `;
-      }
-
-      // 🟢 DESTINOS
-      return `
-        <div class="card">
-          <h3>${d.nombre}</h3>
-          <p><strong>${d.dias} días</strong></p>
-          <p>📅 ${d.fechas}</p>
-          <p>✈️ ${d.vuelo}€</p>
-          <p>🏨 ${d.hotel} ${d.hotel_precio}€</p>
-
-          <button class="btn" onclick="window.location='destino.html?slug=${d.slug}'">
-            Ver detalles
-          </button>
-        </div>
-      `;
-    }
-
-    function mostrarOfertas(lista) {
-      const container = document.getElementById('cards-hero');
-
-      if (lista.length === 0) {
-        container.innerHTML = "<p>No se encontraron resultados 😔</p>";
-        return;
-      }
-
-      container.innerHTML = lista.map(d => generarCard(d)).join('');
-    }
-
-    // =============================
-    // BOTONES DESTINOS / RUTAS
-    // =============================
-    document.getElementById('btn-destinos').addEventListener('click', () => {
-      mostrarOfertas(destinos);
-      setActive('btn-destinos');
-    });
-
-    document.getElementById('btn-rutas').addEventListener('click', () => {
-      mostrarOfertas(rutas);
-      setActive('btn-rutas');
-    });
-
-    function setActive(id) {
-      document.querySelectorAll('.toggle-vistas button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
-    }
-
-  </script>
-
+  <script src="script-cliente.js"></script>
 </body>
-
 </html>
