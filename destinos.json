@@ -135,30 +135,7 @@
     "hotel_link": "https://www.booking.com/index.html?aid=TU_ID_AFILIADO",
     "imagen": "https://cdn2.civitatis.com/portugal/lisboa/guia/lisbon-tram-seo.jpg",
     "itinerario": [
-      {
-        "dia": "Día 1: Llegada y primer contacto con la ciudad",
-        "manana": "Llegada a Lisboa. Traslado al alojamiento y check-in. Paseo por el Barrio Alto para explorar sus calles empedradas y vistas al río.",
-        "tarde": "Visita guiada al Castillo de São Jorge. Almuerzo en un restaurante típico cerca del castillo, como 'Taberna da Esperança'.",
-        "noche": "Cena en el barrio de Alfama con vistas al río Tajo. Recomendado: 'Cervejaria Ramiro' para probar bacalhau (bacalao) y pastéis de nata."
-      },
-      {
-        "dia": "Día 2: Arte, historia y miradores",
-        "manana": "Visita al Museo Nacional do Azulejo para conocer la tradición cerámica portuguesa. Desayuno en 'Manteigaria da Rua das Flores'.",
-        "tarde": "Recorrido por el Elevador de Santa Justa y paseo por la Baixa. Visita al Convento do Carmo y su museo. Almuerzo en 'A Baiuca'.",
-        "noche": "Atardecer en el Miradouro da Senhora do Monte. Cena en 'Canto da Cidade' con platos tradicionales como 'feijoada' o 'arroz de marisco'."
-      },
-      {
-        "dia": "Día 3: Excursión a Sintra y naturaleza",
-        "manana": "Excursión a Sintra en tren. Visita al Palacio da Pena, un castillo de cuento con vistas espectaculares. Desayuno en Sintra en 'Tascantiga'.",
-        "tarde": "Recorrido por el Palacio Nacional de Sintra y el Jardín de la Quinta da Regaleira. Almuerzo en 'A Tasquinha do Avillez'. Regreso a Lisboa en tren.",
-        "noche": "Cena ligera en el barrio de Graça. Visita nocturna al Miradouro da Graça para disfrutar de las luces de la ciudad. Opcional: espectáculo de fado en 'Clube de Fado'."
-      },
-      {
-        "dia": "Día 4: Cultura marina y despedida",
-        "manana": "Visita al Museo de la Marina y paseo por el barrio de Belém. Desayuno en 'Fábrica Coffee Roasters'.",
-        "tarde": "Recorrido por el Monasterio de los Jerónimos y la Torre de Belém. Almuerzo en 'Belém Social Club'. Tiempo libre para comprar azulejos o pastéis de nata en 'Manteigaria de Belém'.",
-        "noche": "Última cena en 'DOC Lisboa' con vistas panorámicas de la ciudad. Traslado al aeropuerto o alojamiento según itinerario."
-      }
+      
     ]
   }
 ]
