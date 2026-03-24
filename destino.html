@@ -51,47 +51,85 @@ fetch('destinos.json')
   .then(res => res.json())
   .then(data => {
     const destino = data.find(d => d.slug === slug);
-    if(destino){
-      // Fondo hero
-      const hero = document.getElementById('hero-destino');
-      hero.style.backgroundImage = `url(${destino.imagen})`;
+    if (!destino) return;
 
-      // Detalle viaje con columnas vuelo/hotel
-      const detalle = document.getElementById('detalle-viaje');
-      detalle.innerHTML = `
-        <div class="viaje-col">
-          <h2>✈️ ${destino.nombre} - ${destino.dias} días</h2>
-          <p>📅 Fechas: ${destino.fechas}</p>
-          <p>🛫 Vuelo ida y vuelta: ${destino.vuelo}€</p>
-          <p>⏱️ Duración aproximada: ${destino.vuelo_tiempo}</p>
-          <button class="btn" onclick="window.open('https://www.skyscanner.es/transport/flights/mad/${destino.slug}/','_blank')">
-            Reservar vuelo
-          </button>
-        </div>
+    // HERO
+    const hero = document.getElementById('hero-destino');
+    hero.style.backgroundImage = `url(${destino.imagen})`;
 
-        <div class="viaje-col">
-          <h2>🏨 Hotel recomendado</h2>
-          <p>📍 ${destino.hotel}</p>
-          <p>💰 Precio por noche: ${destino.hotel_precio}€</p>
-          <p>💡 Tip: Reserva pronto para mejores precios</p>
-          <button class="btn-azul" onclick="window.open('${destino.hotel_link}','_blank')">
-            Reservar hotel
-          </button>
-        </div>
-      `;
+    // DETALLE
+    const detalle = document.getElementById('detalle-viaje');
+    detalle.innerHTML = `
+      <div class="viaje-col">
+        <h2>✈️ ${destino.nombre} - ${destino.dias} días</h2>
+        <p>📅 Fechas: ${destino.fechas}</p>
+        <p>🛫 Vuelo ida y vuelta: ${destino.vuelo}€</p>
+        <p>⏱️Duración aproximada:  ${destino.vuelo_tiempo}</p>
 
-      // Itinerario en 3 cards por fila
-      const diasIt = document.getElementById('dias-itinerario');
-      diasIt.innerHTML = destino.itinerario.map(d => `
-        <div class="itinerario-card">
-          <h3>${d.dia}</h3>
-          <p><strong>🌅 Mañana:</strong> ${d.manana}</p>
-          <p><strong>🌇 Tarde:</strong> ${d.tarde}</p>
-          <p><strong>🌙 Noche:</strong> ${d.noche}</p>
-        </div>
-      `).join('');
-    }
+        <button class="btn" id="btn-vuelos">
+          Reservar vuelo
+        </button>
+      </div>
+
+      <div class="viaje-col">
+        <h2>🏨 Hotel recomendado</h2>
+        <p>📍 ${destino.hotel}</p>
+        <p>💰 Precio total:  ${destino.hotel_precio}€</p>
+        <p>💡 Tip: Reserva pronto para mejores precios</p>
+
+        <button class="btn-azul" id="btn-hotel">
+          Reservar hotel
+        </button>
+      </div>
+    `;
+
+    // ITINERARIO
+    const diasIt = document.getElementById('dias-itinerario');
+    diasIt.innerHTML = destino.itinerario.map(d => `
+      <div class="itinerario-card">
+        <h3>${d.dia}</h3>
+        <p><strong>🌅 Mañana:</strong> ${d.manana}</p>
+        <p><strong>🌇 Tarde:</strong> ${d.tarde}</p>
+        <p><strong>🌙 Noche:</strong> ${d.noche}</p>
+      </div>
+    `).join('');
+
+    // =============================
+    // BOTÓN VUELOS
+    // =============================
+    document.getElementById('btn-vuelos').addEventListener('click', () => {
+
+      // ⚠️ ASEGÚRATE DE TENER ESTO EN JSON
+      if (!destino.fecha_ida || !destino.fecha_vuelta || !destino.iata_origen || !destino.iata_destino) {
+        alert('Faltan datos de vuelo en el JSON');
+        return;
+      }
+
+      let ida = destino.fecha_ida.replace(/-/g, '');
+      let vuelta = destino.fecha_vuelta.replace(/-/g, '');
+
+      const url = `https://www.skyscanner.es/transport/flights/${destino.iata_origen}/${destino.iata_destino}/${ida}/${vuelta}/`;
+
+      window.open(url, '_blank');
+    });
+
+    // =============================
+    // BOTÓN HOTEL
+    // =============================
+    document.getElementById('btn-hotel').addEventListener('click', () => {
+
+      if (!destino.fecha_ida || !destino.fecha_vuelta) {
+        window.open(destino.hotel_link, '_blank');
+        return;
+      }
+
+      const url = `https://www.booking.com/searchresults.es.html?ss=${destino.nombre}&checkin=${destino.fecha_ida}&checkout=${destino.fecha_vuelta}&group_adults=2&no_rooms=1`;
+
+      window.open(url, '_blank');
+    });
+
   });
 </script>
+
 </body>
 </html>

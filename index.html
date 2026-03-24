@@ -38,7 +38,7 @@
             </div>
 
             <div class="campo-fecha">
-              <p>Fecha vuelta</p>
+              <p id="fecha-vuelta-p">Fecha vuelta</p>
               <input type="date" id="fecha-vuelta" placeholder="Selecciona fecha">
             </div>
 
@@ -100,6 +100,7 @@
       soloIda = !soloIda;
 
       document.getElementById('fecha-vuelta').style.display = soloIda ? 'none' : 'block';
+      document.getElementById('fecha-vuelta-p').style.display = soloIda ? 'none' : 'block';
 
       document.getElementById('btn-toggle-vuelo').textContent =
         soloIda ? 'Modo: Solo ida' : 'Modo: Ida y vuelta';
@@ -167,7 +168,7 @@
           <p><strong>${d.dias} días</strong></p>
           <p>📅 ${d.fechas}</p>
           <p>✈️ ${d.vuelo}€</p>
-          <p>🏨 ${d.hotel}</p>
+          <p>🏨 ${d.hotel} ${d.hotel_precio}€</p>
 
           <img class="favorito" 
                src="https://images.vexels.com/media/users/3/136916/isolated/lists/aa21eb60437133bf4f4be189636a187a-icono-de-contorno-favorito-de-estrella.png"
@@ -238,7 +239,7 @@
 
       if (mostrandoFavoritos) {
         mostrarOfertas(destinos.filter(d => favoritos.includes(d.slug)));
-        btn - fav - toggle.textContent == "Mostrar todos";
+        document.getElementById('btn-fav-toggle').textContent = "Mostrar todos";
       } else {
         mostrarOfertas(destinos);
         btn - fav - toggle.textContent == "Mostrar favoritos";
