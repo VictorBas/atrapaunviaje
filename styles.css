@@ -869,6 +869,11 @@ input[type="date"] {
   background: #0070f3; 
   color: white;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+   height: 40px;
 }
 
 /* 🔵 ACTIVO (Destinos o Rutas seleccionado) */
